@@ -1,0 +1,11 @@
+body
+{
+    background-image: url(../resources/images/backgmenucomlogo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+button
+{
+    background-size: auto;
+}
