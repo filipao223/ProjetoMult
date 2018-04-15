@@ -1,0 +1,65 @@
+/*button
+{
+    background-color: transparent;
+    border: none;
+    height: auto;
+    width: auto;
+    text-align: center;
+    opacity: 1;
+    align-items: baseline;
+    display: block;
+    margin-bottom: 7px;
+}*/
+
+
+body
+{
+    background-image: url(../resources/images/backgmenucomlogo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+button {
+    border-radius: 4px;
+    background-color: #99ae35;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-family: monospace;
+    font-size: 32px;
+    padding: 16px;
+    width: 400px;
+    height: auto;
+    transition: all 0.5s;
+    cursor: pointer;
+    align-items: baseline;
+    margin-bottom: 14px;
+    bottom: -350px;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+}
+
+button{
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: 0.5s;
+}
+
+/*button:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 14px;
+    right: -15px;
+    transition: 0.5s;
+}
+
+button:hover{
+    padding-right: 24px;
+    padding-left:8px;
+}
+
+button:hover:after {
+    opacity: 1;
+    right: 10px;
+}*/

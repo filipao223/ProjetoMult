@@ -1,0 +1,5 @@
+sprint
+ficar parado
+no-control
+adversario + lento
+bola no chao
