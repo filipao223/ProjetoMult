@@ -37,30 +37,42 @@ function main()
 function onClickButtons(button, photo, numImg)
 {
     if(button == document.getElementById("blueTeamNextBtn")){
-        if(numImg==8) return numImg;
-        numImg++;
+        if(numImg==8){
+            numImg = 1;
+        }else{
+            numImg++;    
+        }
         var source = "../resources/images/blueTeam/char" + numImg.toString()+"_blue.png";
         console.log(numImg);
         photo.src = source;
     }
 
     else if(button == document.getElementById("blueTeamBackBtn")){
-        if(numImg == 1) return numImg;
-        numImg--;
+        if(numImg == 1){
+            numImg = 8;
+        }else{
+            numImg--;   
+        }
         var source = "../resources/images/blueTeam/char" + numImg.toString()+"_blue.png";
         photo.src = source;
     }
     
     else if(button == document.getElementById("redTeamNextBtn")){
-        if(numImg == 8) return numImg;
-        numImg++;
+        if(numImg==8){
+            numImg = 1;
+        }else{
+            numImg++;    
+        }
         var source = "../resources/images/redTeam/char" + numImg.toString()+"_red.png";
         photo.src = source;
     }
     
     else if(button == document.getElementById("redTeamBackBtn")){
-        if(numImg == 1) return numImg;
-        numImg--;
+        if(numImg == 1){
+            numImg = 8;
+        }else{
+            numImg--;   
+        }
         var source = "../resources/images/redTeam/char" + numImg.toString()+"_red.png";
         photo.src = source;
     }
