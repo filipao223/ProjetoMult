@@ -8,4 +8,6 @@ body
 button
 {
     background-size: auto;
+    background-color: transparent;
+    border: none;
 }

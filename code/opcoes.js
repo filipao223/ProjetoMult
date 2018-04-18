@@ -15,7 +15,7 @@ function main(){
 		document.location.href = "som.html";
 	});
 
-	controlosBtn.addEventListener("onclick", funtion(){
+	controlosBtn.addEventListener("onclick", function(){
 		document.location.href = "controlos.html";
 	});
 
