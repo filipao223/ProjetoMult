@@ -9,7 +9,6 @@
 var canvas;
 var currentWindow;
 var spArray = new Array(1);
-console.log("at start");
 console.log(spArray);
 var ctx;
 
