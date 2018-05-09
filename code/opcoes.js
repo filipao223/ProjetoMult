@@ -11,15 +11,15 @@ function main(){
 	var controlosBtn = document.getElementById("controlosBtn");
 	var menuBtn = document.getElementById("menuBtn");
 
-	somBtn.addEventListener("onclick", funtion(){
+	somBtn.addEventListener("click", function(){
 		document.location.href = "som.html";
 	});
 
-	controlosBtn.addEventListener("onclick", function(){
+	controlosBtn.addEventListener("click", function(){
 		document.location.href = "controlos.html";
 	});
 
-	menuBtn.addEventListener("onclick", function(){
+	menuBtn.addEventListener("click", function(){
 		document.location.href = "menu.html";
 	});
 }

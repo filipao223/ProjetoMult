@@ -62,8 +62,8 @@ function main(){
 	canvas.height = window.innerHeight;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;*/
-	canvas.width = 1920;
-	canvas.height = 1080;
+	canvas.width = 100;
+	canvas.height = 100;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;
 	draw();
@@ -127,10 +127,10 @@ function keyDownEvent(evt){
 				intervalRightArrow = setInterval(moveRight, 25);
 			}
 			break;
-		case 40:
+		/*case 40:
 			if(intervalDownArrow == -1){
 				intervalDownArrow = setInterval(moveDown, 25);
-			}
+			}*/
 			break;
 	}
 }
@@ -149,9 +149,9 @@ function keyUpEvent(evt){
 			clearInterval(intervalRightArrow);
 			intervalRightArrow = -1;
 			break;
-		case 40:
+		/*case 40:
 			clearInterval(intervalDownArrow);
 			intervalDownArrow = -1;
-			break;
+			break;*/
 	}
 }

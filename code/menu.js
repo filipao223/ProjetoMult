@@ -18,7 +18,7 @@ function main()
 	var creditosBtn = document.getElementById("creditosBtn");
 
 	simplesBtn.addEventListener("click", function(){
-		/*Qualquer coisa*/
+		document.location.href = "escolha.html";
 	});
 
 	campeonatoBtn.addEventListener("click", function(){
