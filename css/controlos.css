@@ -5,6 +5,7 @@ body{
 }
 
 button {
+  display: block;
   border-radius : 2.5%;
   background-color: #99ae35;
   border: none;
@@ -19,6 +20,6 @@ button {
   cursor: pointer;
   align-items: baseline;
   margin-bottom : 0.5%;
-  top : 200px;
+  top : 100px;
   box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
