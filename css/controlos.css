@@ -5,22 +5,23 @@ html{
 }
 
 button {
-    border-radius : 2.5%;
-    background-color: #99ae35;
-    border: none;
-    color: #fff;
-    text-align: center;
-    font-family: monospace;
-    width : 20%;
-    padding : 1.5%;
-    font-size: 110%;
-    height: auto;
-    transition: all 0.5s;
-    cursor: pointer;
-    align-items: baseline;
-    margin-bottom : 0.5%;
-    bottom: -250px;
-    box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
+  display: block;
+  border-radius : 2.5%;
+  background-color: #99ae35;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: monospace;
+  width : 30%;
+  padding : 1.5%;
+  font-size: 250%;
+  height: auto;
+  transition: all 0.5s;
+  cursor: pointer;
+  align-items: baseline;
+  margin-bottom : 0.5%;
+  top : 100px;
+  box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
 
 button{
