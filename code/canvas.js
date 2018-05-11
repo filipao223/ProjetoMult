@@ -62,8 +62,8 @@ function main(){
 	canvas.height = window.innerHeight;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;*/
-	canvas.width = 1920;
-	canvas.height = 1080;
+	canvas.width = 1200;
+	canvas.height = 600;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;
 	draw();
@@ -90,7 +90,7 @@ function moveLeft(){
 }
 
 function moveRight(){
-	if(xpos < canvas_width+(img.width/2)){
+	if(xpos < canvas_width){
 		xpos += 5;
 	}
 	draw();
@@ -104,7 +104,7 @@ function moveUp(){
 }
 
 function moveDown(){
-	if(ypos < canvas_height+(img.height/2)){
+	if(ypos < canvas_height){
 		ypos += 5;
 	}
 	draw();

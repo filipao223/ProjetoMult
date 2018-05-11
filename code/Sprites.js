@@ -1,5 +1,5 @@
 class Sprites{
-  constructor(x, y, w, h, speed, img)
+  constructor(x, y, w, h, speed, img, blue)
 	{
 		//posição e movimento
 		this.xIni = x;
@@ -11,6 +11,7 @@ class Sprites{
 		//VELOCIDADES
 		this.speed = speed;
 		this.speedIni = speed;
+    this.blue = blue;
 
 		//imagem
 		this.img = img;
