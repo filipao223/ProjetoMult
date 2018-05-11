@@ -74,6 +74,15 @@ function main(){
 	canvas.height = 600;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;
+	var random = Math.round(Math.random() * (5 - 1)) + 1
+	var background = new Image();
+	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
+
+// Make sure the image is loaded first otherwise nothing will draw.
+	background.onload = function(){
+    ctx.drawImage(background,0,0);
+	}
+	/*random(canvas_width,canvas_height);*/
 	drawBlue();
 	drawRed();
 
