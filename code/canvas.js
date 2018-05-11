@@ -52,9 +52,12 @@ function main(){
 	i_height = 75;
 
 	currentWindow = document.defaultView;
+	var queryString = decodeURIComponent(window.location.search);
+	queryString = queryString.substring(1);
+	var queries = queryString.split("&");
 
-	img_blue_source = "../resources/images/blueTeam/char1_blue.png";
-	img_red_source = "../resources/images/redTeam/char1_red.png";
+	img_blue_source = "../resources/images/blueTeam/char"+queries[1]+"_blue.png";
+	img_red_source = "../resources/images/redTeam/char"+queries[0]+"_red.png";
 	img_blue = new Image();
 	img_red = new Image();
 	//Carater azul

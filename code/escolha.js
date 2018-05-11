@@ -41,7 +41,7 @@ function main()
 		});
 
 		jogarBtn.addEventListener("click", function(){
-			document.location.href = "canvas.html";
+			document.location.href = "canvas.html" + "?" +numImgRed + "&" + numImgBlue;
 		});
 }
 

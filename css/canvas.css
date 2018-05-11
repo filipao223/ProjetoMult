@@ -2,19 +2,21 @@ myCanvas
 {
     padding: 0;
     margin: auto;
-    display: block;
+    display: inline;
     background-size: 100% 100%;
+    background-color: transparent;
+
 }
 
 canvasBack{
   padding: 0;
   margin: auto;
-  display: block;
+  display: inline;
   background-size: 100% 100%;
 }
 
 html{
   background-repeat: no-repeat;
   background-size: cover;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
