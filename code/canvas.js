@@ -7,10 +7,12 @@
 }());
 
 var canvas;
+var canvas2;
 var currentWindow;
 var spArray = new Array(1);
 console.log(spArray);
 var ctx;
+var ctxBack;
 
 var sprite;
 var img_blue_source;
@@ -65,24 +67,29 @@ function main(){
 	img_red.src = img_red_source;
 
 	canvas = document.getElementById("myCanvas");
+	canvas2 = document.getElementById("canvasBack");
 	ctx = canvas.getContext("2d");
+	ctxBack = canvas2.getContext("2d");
 	/*canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;*/
 	canvas.width = 1200;
 	canvas.height = 600;
+	canvas2.width = canvas.width;
+	canvas2.height = canvas.height;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;
 	var random = Math.round(Math.random() * (5 - 1)) + 1
 	var background = new Image();
-	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
 
-// Make sure the image is loaded first otherwise nothing will draw.
-	background.onload = function(){
-    ctx.drawImage(background,0,0);
-	}
+	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
+	// Make sure the image is loaded first otherwise nothing will draw.
+		background.onload = function(){
+	    ctxBack.drawImage(background,0,0);
+		}
 	/*random(canvas_width,canvas_height);*/
+
 	drawBlue();
 	drawRed();
 

@@ -1,13 +1,20 @@
-canvas
+myCanvas
 {
     padding: 0;
     margin: auto;
     display: block;
-    background-size: cover;
-    background-image: url(../resources/images/backgrounds/bg1_f.png);
+    background-size: 100% 100%;
+}
+
+canvasBack{
+  padding: 0;
+  margin: auto;
+  display: block;
+  background-size: 100% 100%;
 }
 
 html{
   background-repeat: no-repeat;
   background-size: cover;
+  background-size: 100%;
 }
