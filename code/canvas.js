@@ -31,24 +31,20 @@ var i_height;
 var intervalLeftArrow = -1;
 var intervalUpArrow = -1;
 var intervalRightArrow = -1;
-var intervalDownArrow = -1;
+var intervalMoveDown = -1;
+
+var previousYposBeforeJump;
+var jumpSize; //A altura do salto
+var jumpMax = 15;
 
 function main(){
-	xpos = 1;
-	ypos = 1;
+	xpos = 850;
+	ypos = 300;
 
 	i_width = 75;
 	i_height = 75;
 
 	currentWindow = document.defaultView;
-	/*currentWindow.addEventListener('resize', function(){
-		canvas = document.getElementById("myCanvas");
-		ctx = canvas.getContext("2d");
-		canvas_width = window.innerWidth;
-		canvas_height = window.innerHeight;
-
-		draw();
-	});*/
 
 	img_source = "../resources/images/blueTeam/char1_blue.png";
 	img = new Image();
@@ -71,7 +67,7 @@ function main(){
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
 
-	setInterval(draw, 1000/30);
+	setInterval(draw, 1000/60);
 }
 
 function draw()
@@ -83,7 +79,7 @@ function draw()
 }
 
 function moveLeft(){
-	if(xpos > 0-(img.width/2)){
+	if(xpos > 0){
 		xpos -= 5;
 	}
 	draw();
@@ -96,18 +92,33 @@ function moveRight(){
 	draw();
 }
 
-function moveUp(){
-	if(ypos > 0-(img.height/2)){
+function moveUp(){ //Jump
+	if(ypos > 0){
 		ypos -= 5;
 	}
+	if(ypos < 0){
+		intervalMoveDown = setInterval(moveDown);
+		clearInterval(intervalUpArrow);
+		intervalUpArrow = -1;
+	}
+	if(jumpSize > jumpMax){
+		intervalMoveDown = setInterval(moveDown);
+		clearInterval(intervalUpArrow);
+		intervalUpArrow = -1;
+	}
+	jumpSize += 1;
 	draw();
 }
 
 function moveDown(){
-	if(ypos < canvas_height){
+	if(ypos != previousYposBeforeJump){
 		ypos += 5;
+		draw();
 	}
-	draw();
+	else{
+		clearInterval(intervalMoveDown);
+		intervalMoveDown = -1;
+	}
 }
 
 function keyDownEvent(evt){
@@ -119,17 +130,14 @@ function keyDownEvent(evt){
 			break;
 		case 38:
 			if(intervalUpArrow == -1){
+				jumpSize = 0;
+				previousYposBeforeJump = ypos;
 				intervalUpArrow = setInterval(moveUp, 25);
 			}
 			break;
 		case 39:
 			if(intervalRightArrow == -1){
 				intervalRightArrow = setInterval(moveRight, 25);
-			}
-			break;
-		case 40:
-			if(intervalDownArrow == -1){
-				intervalDownArrow = setInterval(moveDown, 25);
 			}
 			break;
 	}
@@ -142,16 +150,12 @@ function keyUpEvent(evt){
 			intervalLeftArrow = -1;
 			break;
 		case 38:
-			clearInterval(intervalUpArrow);
+			/*clearInterval(intervalUpArrow);
 			intervalUpArrow = -1;
-			break;
+			break;*/
 		case 39:
 			clearInterval(intervalRightArrow);
 			intervalRightArrow = -1;
-			break;
-		case 40:
-			clearInterval(intervalDownArrow);
-			intervalDownArrow = -1;
 			break;
 	}
 }
