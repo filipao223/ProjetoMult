@@ -13,14 +13,17 @@ console.log(spArray);
 var ctx;
 
 var sprite;
-var img_source;
+var img_blue_source;
+var img_red_source;
 
-var nLoad = 0;
-	var totLoad = 1;
-	var img;
+var img_blue;
+var img_red;
 
-var xpos;
-var ypos;
+var xposBlue;
+var yposBlue;
+
+var xposRed;
+var yposRed;
 
 var canvas_width;
 var canvas_height;
@@ -33,24 +36,33 @@ var intervalUpArrow = -1;
 var intervalRightArrow = -1;
 var intervalMoveDown = -1;
 
-var previousYposBeforeJump;
+var previousyposBlueBeforeJump;
 var jumpSize; //A altura do salto
 var jumpMax = 15;
 
 function main(){
-	xpos = 850;
-	ypos = 300;
+	xposBlue = 850;
+	yposBlue = 300;
+	xposRed = 50;
+	yposRed = 300;
 
 	i_width = 75;
 	i_height = 75;
 
 	currentWindow = document.defaultView;
 
-	img_source = "../resources/images/blueTeam/char1_blue.png";
-	img = new Image();
-	//img.addEventListener("load", imgLoadedHandler);
-	img.id="blue1";
-	img.src = img_source;  //dá ordem de carregamento da imagem
+	img_blue_source = "../resources/images/blueTeam/char1_blue.png";
+	img_red_source = "../resources/images/redTeam/char1_red.png";
+	img_blue = new Image();
+	img_red = new Image();
+	//Carater azul
+	//img_blue.addEventListener("load", imgLoadedHandler);
+	img_blue.id = "blue1";
+	img_blue.src = img_blue_source;  //dá ordem de carregamento da imagem
+
+	//Carater vermelho
+	img_red.id = "red1";
+	img_red.src = img_red_source;
 
 	canvas = document.getElementById("myCanvas");
 	ctx = canvas.getContext("2d");
@@ -62,41 +74,50 @@ function main(){
 	canvas.height = 600;
 	canvas_width = canvas.width;
 	canvas_height = canvas.height;
-	draw();
+	drawBlue();
+	drawRed();
 
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
 
-	setInterval(draw, 1000/60);
+	setInterval(drawBlue, 1000/60);
 }
 
-function draw()
+function drawBlue()
 {
 	//console.log("Canvas width: " + canvas_width + ", canvas height: " + canvas_height);
-	ctx.clearRect(xpos, ypos, img.width, img.height);
+	ctx.clearRect(xposBlue, yposBlue, img_blue.width, img_blue.height);
 	ctx.fillStyle = "#339933";
-	ctx.drawImage(img, xpos, ypos);
+	ctx.drawImage(img_blue, xposBlue, yposBlue);
+}
+
+function drawRed(){
+	ctx.clearRect(xposRed, yposRed, img_red.width, img_red.height);
+	ctx.fillStyle = "#339933";
+	ctx.drawImage(img_red, xposRed, yposRed);
 }
 
 function moveLeft(){
-	if(xpos > 0){
-		xpos -= 5;
+	if(xposBlue > 0){
+		xposBlue -= 5;
 	}
-	draw();
+	drawBlue();
+	drawRed();
 }
 
 function moveRight(){
-	if(xpos < canvas_width){
-		xpos += 5;
+	if(xposBlue < canvas_width){
+		xposBlue += 5;
 	}
-	draw();
+	drawBlue();
+	drawRed();
 }
 
 function moveUp(){ //Jump
-	if(ypos > 0){
-		ypos -= 5;
+	if(yposBlue > 0){
+		yposBlue -= 5;
 	}
-	if(ypos < 0){
+	if(yposBlue < 0){
 		intervalMoveDown = setInterval(moveDown);
 		clearInterval(intervalUpArrow);
 		intervalUpArrow = -1;
@@ -107,13 +128,15 @@ function moveUp(){ //Jump
 		intervalUpArrow = -1;
 	}
 	jumpSize += 1;
-	draw();
+	drawBlue();
+	drawRed();
 }
 
 function moveDown(){
-	if(ypos != previousYposBeforeJump){
-		ypos += 5;
-		draw();
+	if(yposBlue != previousyposBlueBeforeJump){
+		yposBlue += 5;
+		drawBlue();
+		drawRed();
 	}
 	else{
 		clearInterval(intervalMoveDown);
@@ -131,7 +154,7 @@ function keyDownEvent(evt){
 		case 38:
 			if(intervalUpArrow == -1){
 				jumpSize = 0;
-				previousYposBeforeJump = ypos;
+				previousyposBlueBeforeJump = yposBlue;
 				intervalUpArrow = setInterval(moveUp, 25);
 			}
 			break;
