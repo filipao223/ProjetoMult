@@ -16,10 +16,6 @@ function main()
 
 	jogoBtn.addEventListener("click", function(){
         var numJog = document.getElementById("numJogadores").value;
-        if(isNaN(numJog)){
-            document.getElementById("numJogadores").value = "Valor não aceite";
-        }else{
-            console.log(numJog);    
-        }
+        console.log(numJog);
 	});
 }
