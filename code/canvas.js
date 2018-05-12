@@ -33,7 +33,7 @@ var canvas_height;
 var i_width;
 var i_height;
 
-var intervalLeftArrow = -1;
+var intervalMoveLeftBlue = -1;
 var intervalUpArrow = -1;
 var intervalRightArrow = -1;
 var intervalMoveDown = -1;
@@ -73,10 +73,7 @@ function main(){
 	canvas2 = document.getElementById("canvasBack");
 	ctx = canvas.getContext("2d");
 	ctxBack = canvas2.getContext("2d");
-	/*canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-	canvas_width = canvas.width;
-	canvas_height = canvas.height;*/
+
 	canvas.width = 1200;
 	canvas.height = 600;
 	canvas2.width = canvas.width;
@@ -87,11 +84,10 @@ function main(){
 	var background = new Image();
 
 	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
-	// Make sure the image is loaded first otherwise nothing will draw.
-		background.onload = function(){
-	    ctxBack.drawImage(background,0,0);
-		}
-	/*random(canvas_width,canvas_height);*/
+
+	background.onload = function(){
+		ctx.drawImage(background, 0, 0, background.width, background.height, 0, 0, canvas2.width, canvas2.height);
+	}
 
 	drawBlue();
 	drawRed();
@@ -99,7 +95,8 @@ function main(){
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
 
-	setInterval(drawBlue, 1000/60);
+	setInterval(drawBlue, 1000/30);
+	setInterval(drawRed, 1000/30);
 }
 
 function drawBlue()
@@ -107,7 +104,8 @@ function drawBlue()
 	//console.log("Canvas width: " + canvas_width + ", canvas height: " + canvas_height);
 	ctx.clearRect(xposBlue, yposBlue, img_blue.width, img_blue.height);
 	ctx.fillStyle = "#339933";
-	ctx.drawImage(img_blue, xposBlue, yposBlue);
+	//ctx.drawImage(img_blue, xposBlue, yposBlue);
+	ctx.drawImage(img_blue, xposBlue, yposBlue, 10, 10, xposBlue,yposBlue,img_blue.width,img_blue.height);
 }
 
 function drawRed(){
@@ -116,7 +114,7 @@ function drawRed(){
 	ctx.drawImage(img_red, xposRed, yposRed);
 }
 
-function moveLeft(){
+function moveLeft(player){
 	if(xposBlue > 0){
 		xposBlue -= 5;
 	}
@@ -124,7 +122,7 @@ function moveLeft(){
 	drawRed();
 }
 
-function moveRight(){
+function moveRight(player){
 	if(xposBlue < canvas_width){
 		xposBlue += 5;
 	}
@@ -132,7 +130,7 @@ function moveRight(){
 	drawRed();
 }
 
-function moveUp(){ //Jump
+function moveUp(player){ //Jump
 	if(yposBlue > 0){
 		yposBlue -= 5;
 	}
@@ -151,7 +149,7 @@ function moveUp(){ //Jump
 	drawRed();
 }
 
-function moveDown(){
+function moveDown(player){
 	if(yposBlue != previousyposBlueBeforeJump){
 		yposBlue += 5;
 		drawBlue();
@@ -166,8 +164,8 @@ function moveDown(){
 function keyDownEvent(evt){
 	switch(evt.keyCode){
 		case 37:
-			if(intervalLeftArrow == -1){
-				intervalLeftArrow = setInterval(moveLeft, 25);
+			if(intervalMoveLeftBlue == -1){
+				intervalMoveLeftBlue = setInterval(moveLeft, 25);
 			}
 			break;
 		case 38:
@@ -188,13 +186,13 @@ function keyDownEvent(evt){
 function keyUpEvent(evt){
 	switch(evt.keyCode){
 		case 37:
-			clearInterval(intervalLeftArrow);
-			intervalLeftArrow = -1;
+			clearInterval(intervalMoveLeftBlue);
+			intervalMoveLeftBlue = -1;
 			break;
 		case 38:
-			/*clearInterval(intervalUpArrow);
+			clearInterval(intervalUpArrow);
 			intervalUpArrow = -1;
-			break;*/
+			break;
 		case 39:
 			clearInterval(intervalRightArrow);
 			intervalRightArrow = -1;
