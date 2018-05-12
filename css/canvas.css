@@ -3,8 +3,6 @@ myCanvas
     padding: 0;
     margin: auto;
     display: inline;
-    background-size: 100% 100%;
-    background-color: transparent;
 
 }
 
@@ -12,7 +10,6 @@ canvasBack{
   padding: 0;
   margin: auto;
   display: inline;
-  background-size: 100% 100%;
 }
 
 html{
