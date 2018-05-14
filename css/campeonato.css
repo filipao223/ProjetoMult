@@ -50,3 +50,20 @@ button:hover:after {
   opacity: 1;
   right: 2%;
 }
+
+input {
+    margin-top: 300px;
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #99ae35;
+    padding: 12px 5px 12px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input:focus {
+    width: 50%;
+}

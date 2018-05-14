@@ -20,22 +20,22 @@ body
 }
 
 button {
-    border-radius: 4px;
+    border-radius : 2.5%;
     background-color: #99ae35;
     border: none;
     color: #fff;
     text-align: center;
     font-family: monospace;
-    font-size: 32px;
-    padding: 16px;
-    width: 400px;
+    width : 30%;
+	  padding : 1.5%;
+	  font-size: 250%;
     height: auto;
     transition: all 0.5s;
     cursor: pointer;
     align-items: baseline;
-    margin-bottom: 14px;
-    bottom: -350px;
-    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+    margin-bottom : 1.5%;
+    bottom: -230px;
+    box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
 
 button{

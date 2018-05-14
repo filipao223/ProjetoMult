@@ -1,39 +1,27 @@
-body
-{
-    background-image: url(../resources/images/backgcreditos.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-p
-{
-    background-color: #d6e882;
-    text-align: center;
-    color: #ffffff;
-    font-family: monospace;
-    font-size: 30px;
-    margin-top: 250px;
-    margin-left: 200px;
-    margin-right: 200px;
+html{
+  background-image: url(../resources/images/backgmenucomlogo.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 button {
-    border-radius: 4px;
-    background-color: #99ae35;
-    border: none;
-    color: #fff;
-    text-align: center;
-    font-family: monospace;
-    font-size: 32px;
-    padding: 16px;
-    width: 400px;
-    height: auto;
-    transition: all 0.5s;
-    cursor: pointer;
-    align-items: baseline;
-    margin-bottom: 14px;
-    bottom: -100px;
-    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  display: block;
+  border-radius : 2.5%;
+  background-color: #99ae35;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: monospace;
+  width : 30%;
+  padding : 1.5%;
+  font-size: 250%;
+  height: auto;
+  transition: all 0.5s;
+  cursor: pointer;
+  align-items: baseline;
+  margin-bottom : 0.5%;
+  top : 100px;
+  box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
 
 button{
@@ -43,21 +31,56 @@ button{
     transition: 0.5s;
 }
 
-button:after {
-    content: 'x';
-    position: absolute;
-    opacity: 0;
-    top: 14px;
-    right: -15px;
+button1 {
+    border-radius : 2.5%;
+    background-color: #99ae35;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-family: monospace;
+    width : 20%;
+    padding : 1.5%;
+    font-size: 110%;
+    height: auto;
+    transition: all 0.5s;
+    cursor: pointer;
+    align-items: baseline;
+    margin-bottom : 0.5%;
+    margin-left: 15%;
+    left: 155px;
+    bottom: 70px;
+    box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
+}
+
+button1{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
     transition: 0.5s;
 }
 
-button:hover{
-    padding-right: 24px;
-    padding-left:8px;
+button2 {
+    border-radius : 2.5%;
+    background-color: #99ae35;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-family: monospace;
+    width : 20%;
+    padding : 1.5%;
+    font-size: 110%;
+    height: auto;
+    transition: all 0.5s;
+    cursor: pointer;
+    align-items: baseline;
+    margin-bottom : 0.5%;
+    bottom: 20px;
+    box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
 
-button:hover:after {
-    opacity: 1;
-    right: 10px;
+button2{
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: 0.5s;
 }
