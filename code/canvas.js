@@ -21,9 +21,6 @@ var img_red_source;
 var img_blue;
 var img_red;
 
-var jmp_blue;
-var jmp_red;
-
 var xposBlue;
 var yposBlue;
 
@@ -36,28 +33,29 @@ var canvas_height;
 var i_width;
 var i_height;
 
-var intervalMoveLeftBlue = -1;
+var intervalmoveLeftBlue = -1;
 var intervalUpArrowBlue = -1;
 var intervalRightArrowBlue = -1;
 var intervalMoveDownBlue = -1;
 
-var intervalMoveRightRed = -1;
-var intervalMoveLeftRed = -1;
+var intervalmoveLeftRed = -1;
 var intervalUpArrowRed = -1;
+var intervalRightArrowRed = -1;
 var intervalMoveDownRed = -1;
 
 var previousyposBlueBeforeJump;
-var previousyposRedBeforeJump
 var jumpSizeBlue; //A altura do salto
 var jumpMaxBlue = 15;
+
+var previousyposRedBeforeJump;
+var jumpSizeRed; //A altura do salto
+var jumpMaxRed = 15;
 
 function main(){
 	xposBlue = 850;
 	yposBlue = 300;
 	xposRed = 50;
 	yposRed = 300;
-
-	var player;
 
 	i_width = 75;
 	i_height = 75;
@@ -115,8 +113,8 @@ function drawBlue()
 	//console.log("Canvas width: " + canvas_width + ", canvas height: " + canvas_height);
 	ctx.clearRect(xposBlue, yposBlue, img_blue.width, img_blue.height);
 	ctx.fillStyle = "#339933";
-	//ctx.drawImage(img_blue, xposBlue, yposBlue);
-	ctx.drawImage(img_blue, xposBlue, yposBlue, 10, 10, xposBlue,yposBlue,img_blue.width,img_blue.height);
+	ctx.drawImage(img_blue, xposBlue, yposBlue);
+	//ctx.drawImage(img_blue, xposBlue, yposBlue, 10, 10, xposBlue,yposBlue,img_blue.width,img_blue.height);
 }
 
 function drawRed(){
@@ -125,52 +123,49 @@ function drawRed(){
 	ctx.drawImage(img_red, xposRed, yposRed);
 }
 
-function moveLeft(player){
-	if(player == 0){
-		if(xposBlue > 0){
-			xposBlue -= 5;
-		}
-		drawBlue();
-		drawRed();
+function moveLeftBlue(){
+	if(xposBlue > 0){
+		xposBlue -= 5;
 	}
-	if(player == 1){
-		if(xposRed > 0){
-			xposRed -= 5;
-		}
-		drawBlue();
-		drawRed();
-	}
+	drawBlue();
+	drawRed();
 }
 
-function moveRight(player){
-	if(player == 0){
-		if(xposBlue < canvas_width){
-			xposBlue += 5;
-		}
-		drawBlue();
-		drawRed();
+function moveLeftRed(){
+	if(xposRed > 0){
+		xposRed -= 5;
 	}
-	if(player == 1){
-			if(xposRed < canvas_width){
-				xposRed += 5;
-			}
-			drawBlue();
-			drawRed();
-		}
-	}
+	drawBlue();
+	drawRed();
 }
 
-function moveUp(player){ //Jump
+function moveRightRed(){
+	if(xposRed < canvas_width){
+		xposRed += 5;
+	}
+	drawBlue();
+	drawRed();
+}
+
+function moveRightBlue(){
+	if(xposBlue < canvas_width){
+		xposBlue += 5;
+	}
+	drawBlue();
+	drawRed();
+}
+
+function moveUpBlue(){ //Jump
 	if(yposBlue > 0){
 		yposBlue -= 5;
 	}
 	if(yposBlue < 0){
-		intervalMoveDownBlue = setInterval(moveDown);
+		intervalMoveDownBlue = setInterval(moveDownBlue);
 		clearInterval(intervalUpArrowBlue);
 		intervalUpArrowBlue = -1;
 	}
 	if(jumpSizeBlue > jumpMaxBlue){
-		intervalMoveDownBlue = setInterval(moveDown);
+		intervalMoveDownBlue = setInterval(moveDownBlue);
 		clearInterval(intervalUpArrowBlue);
 		intervalUpArrowBlue = -1;
 	}
@@ -179,7 +174,26 @@ function moveUp(player){ //Jump
 	drawRed();
 }
 
-function moveDown(player){
+function moveUpRed(){ //Jump
+	if(yposRed > 0){
+		yposRed -= 5;
+	}
+	if(yposRed < 0){
+		intervalMoveDownRed = setInterval(moveDownRed);
+		clearInterval(intervalUpArrowRed);
+		intervalUpArrowRed = -1;
+	}
+	if(jumpSizeRed > jumpMaxRed){
+		intervalMoveDownRed = setInterval(moveDownRed);
+		clearInterval(intervalUpArrowRed);
+		intervalUpArrowRed = -1;
+	}
+	jumpSizeRed += 1;
+	drawBlue();
+	drawRed();
+}
+
+function moveDownBlue(){
 	if(yposBlue != previousyposBlueBeforeJump){
 		yposBlue += 5;
 		drawBlue();
@@ -191,43 +205,62 @@ function moveDown(player){
 	}
 }
 
+function moveDownRed(){
+	if(yposRed != previousyposRedBeforeJump){
+		yposRed += 5;
+		drawBlue();
+		drawRed();
+	}
+	else{
+		clearInterval(intervalMoveDownRed);
+		intervalMoveDownRed = -1;
+	}
+}
+
 function keyDownEvent(evt){
 	switch(evt.keyCode){
 		case 37:
-			if(intervalMoveLeftBlue == -1){
-				intervalMoveLeftBlue = setInterval(moveLeft(0), 25);
+			if(intervalmoveLeftBlue == -1){
+				intervalmoveLeftBlue = setInterval(moveLeftBlue, 25);
 			}
 			break;
 		case 38:
 			if(intervalUpArrowBlue == -1){
 				jumpSizeBlue = 0;
 				previousyposBlueBeforeJump = yposBlue;
-				intervalUpArrowBlue = setInterval(moveUp, 25);
+				intervalUpArrowBlue = setInterval(moveUpBlue, 25);
 			}
 			break;
 		case 39:
 			if(intervalRightArrowBlue == -1){
-				intervalRightArrowBlue = setInterval(moveRight(0), 25);
+				intervalRightArrowBlue = setInterval(moveRightBlue, 25);
 			}
 			break;
-
-		case 87:
-			if(intervalMoveRightRed == -1){
-				intervalMoveRightRed == setInterval(moveRight,25);
+		case 65:
+			if(intervalmoveLeftRed == -1){
+				intervalmoveLeftRed = setInterval(moveLeftRed, 25);
 			}
-		break;
-
-	case 65:
-			if()
+			break;
+		case 87:
+			if(intervalUpArrowRed == -1){
+				jumpSizeRed = 0;
+				previousyposRedBeforeJump = yposRed;
+				intervalUpArrowRed = setInterval(moveUpRed, 25);
+			}
+			break;
+		case 68:
+			if(intervalRightArrowRed == -1){
+				intervalRightArrowRed = setInterval(moveRightRed, 25);
+			}
+			break;
 	}
-
 }
 
 function keyUpEvent(evt){
 	switch(evt.keyCode){
 		case 37:
-			clearInterval(intervalMoveLeftBlue);
-			intervalMoveLeftBlue = -1;
+			clearInterval(intervalmoveLeftBlue);
+			intervalmoveLeftBlue = -1;
 			break;
 		case 38:
 			clearInterval(intervalUpArrowBlue);
@@ -237,5 +270,17 @@ function keyUpEvent(evt){
 			clearInterval(intervalRightArrowBlue);
 			intervalRightArrowBlue = -1;
 			break;
+		case 65:
+			clearInterval(intervalmoveLeftRed);
+			intervalmoveLeftRed = -1;
+			break;
+		case 87:
+			clearInterval(intervalUpArrowRed);
+			intervalUpArrowRed = -1;
+			break;
+		case 68:
+		clearInterval(intervalRightArrowRed);
+		intervalRightArrowRed = -1;
+		break;
 	}
 }
