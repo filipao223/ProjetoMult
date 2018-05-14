@@ -48,8 +48,8 @@ var intervalMoveDownRed = -1;
 
 var previousyposBlueBeforeJump;
 var previousyposRedBeforeJump
-var jumpSize; //A altura do salto
-var jumpMax = 15;
+var jumpSizeBlue; //A altura do salto
+var jumpMaxBlue = 15;
 
 function main(){
 	xposBlue = 850;
@@ -169,12 +169,12 @@ function moveUp(player){ //Jump
 		clearInterval(intervalUpArrowBlue);
 		intervalUpArrowBlue = -1;
 	}
-	if(jumpSize > jumpMax){
+	if(jumpSizeBlue > jumpMaxBlue){
 		intervalMoveDownBlue = setInterval(moveDown);
 		clearInterval(intervalUpArrowBlue);
 		intervalUpArrowBlue = -1;
 	}
-	jumpSize += 1;
+	jumpSizeBlue += 1;
 	drawBlue();
 	drawRed();
 }
@@ -200,7 +200,7 @@ function keyDownEvent(evt){
 			break;
 		case 38:
 			if(intervalUpArrowBlue == -1){
-				jumpSize = 0;
+				jumpSizeBlue = 0;
 				previousyposBlueBeforeJump = yposBlue;
 				intervalUpArrowBlue = setInterval(moveUp, 25);
 			}
