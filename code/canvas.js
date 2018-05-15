@@ -6,6 +6,9 @@
 	window.addEventListener("load", main);
 }());
 
+var stage;
+var stageBack;
+
 var canvas;
 var canvas2;
 var currentWindow;
@@ -81,24 +84,31 @@ function main(){
 	img_red.id = "red1";
 	img_red.src = img_red_source;
 
-	canvas = document.getElementById("myCanvas");
+	/*canvas = document.getElementById("myCanvas");
 	canvas2 = document.getElementById("canvasBack");
 	ctx = canvas.getContext("2d");
-	ctxBack = canvas2.getContext("2d");
+	ctxBack = canvas2.getContext("2d");*/
 
-	canvas.width = 1200;
-	canvas.height = 600;
-	canvas2.width = canvas.width;
-	canvas2.height = canvas.height;
-	canvas_width = canvas.width;
-	canvas_height = canvas.height;
+	stageBack = new createjs.Stage("canvasBack");
+
+	stage = new createjs.Stage("myCanvas");
+	stage.canvas.width = 1200;
+	stage.canvas.height = 600;
+
+	stageBack.canvas.width = stage.canvas.width;
+	stageBack.canvas.height = stage.canvas.height;
+
+	canvas_width = stage.canvas.width;
+	canvas_height = stage.canvas.height;
 	var random = Math.round(Math.random() * (5 - 1)) + 1
 	var background = new Image();
 
 	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
 
 	background.onload = function(){
-		ctx.drawImage(background, 0, 0, background.width, background.height, 0, 0, canvas2.width, canvas2.height);
+		var backBit = new createjs.Bitmap("background");
+		stageBack.addChild(background);
+		stage.update();
 	}
 
 	img_blue.onload = function(){
@@ -123,9 +133,7 @@ function drawBlue(){
 			intervalMoveDownBlue = -1;
 		}
 	}
-	ctx.clearRect(xposBlue, yposBlue, img_blue.width, img_blue.height);
-	ctx.fillStyle = "#339933";
-	ctx.drawImage(img_blue, xposBlue, yposBlue);
+	stage.update();
 }
 
 function drawRed(){
@@ -136,9 +144,7 @@ function drawRed(){
 			intervalMoveDownRed = -1;
 		}
 	}
-	ctx.clearRect(xposRed, yposRed, img_red.width, img_red.height);
-	ctx.fillStyle = "#339933";
-	ctx.drawImage(img_red, xposRed, yposRed);
+	stage.update();
 }
 
 function moveLeftBlue(){
