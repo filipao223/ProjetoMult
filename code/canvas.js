@@ -81,10 +81,12 @@ function main(){
 	//Carater azul
 	img_blue.id = "blue1";
 	img_blue.src = img_blue_source;
+	//img_blue.crossOrigin = "anonymous"; // Should work fine
 
 	//Carater vermelho
 	img_red.id = "red1";
 	img_red.src = img_red_source;
+	//img_red.crossOrigin = "anonymous"; // Should work fine
 
 	container = new createjs.Container();
 
@@ -160,32 +162,65 @@ function drawRed(){
 }
 
 function moveLeftBlue(){
-	if(blueBit.x > boundaryLeft){
+
+	var mvmt = 5;
+
+	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-mvmt, blueBit.y) == false){
+		console.log("no collision");
 		blueBit.x -= 5;
+	}
+	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-mvmt, blueBit.y) == true){
+		console.log("collision");
+		//Verifica se o vermelho pode andar para tras e o azul para a frente
+		if(redBit.x > boundaryLeft){
+			blueBit.x -= 2;
+			redBit.x -= 2;
+		}
 	}
 	drawBlue();
 	drawRed();
 }
 
 function moveLeftRed(){
-	if(redBit.x > boundaryLeft){
+	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y-5) == false){
 		redBit.x -= 5;
+	}
+	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y-5) == true){
+		//Verifica se o azul pode andar para a frente e o vermelho para tras
+		if(blueBit.x > boundaryLeft){
+			redBit.x += 2;
+			blueBit.x -= 2;
+		}
 	}
 	drawBlue();
 	drawRed();
 }
 
 function moveRightRed(){
-	if(redBit.x < boundaryRight){
+	if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + 5, redBit.y)==false){
 		redBit.x += 5;
+	}
+	else if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + 5, redBit.y)==true){
+		//Verifica se o azul pode andar para tras
+		if(blueBit.x < boundaryRight){
+			redBit.x += 2;
+			blueBit.x += 2;
+		}
 	}
 	drawBlue();
 	drawRed();
 }
 
 function moveRightBlue(){
-	if(blueBit.x < boundaryRight){
+	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + 5, blueBit.y)==false){
 		blueBit.x += 5;
+	}
+	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + 5, blueBit.y)==true){
+		//Verifica se o vermelho pode andar para a frente
+		if(redBit.x < boundaryRight){
+			blueBit.x += 2;
+			redBit.x += 2;
+		}
 	}
 	drawBlue();
 	drawRed();
@@ -346,4 +381,9 @@ function updateXY(random){
 			drawBlue();
 			break;
 	}
+}
+
+function checkCollision(otherBit, newPosX, newPosY){
+	if(otherBit.x == newPosX) return true;
+	else return false;
 }
