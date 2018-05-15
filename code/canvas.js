@@ -58,20 +58,23 @@ var jumpMaxBlue = 16;
 var jumpSizeRed; //A altura do salto
 var jumpMaxRed = 16;
 
-var yGround = 300;
+var yGround;
 
 var frameRate = 1000/30;
 
 function main(){
 	xposBlue = 850;
-	yposBlue = 300;
+	yposBlue = 360;
 	xposRed = 50;
-	yposRed = 300;
+	yposRed = 360;
+
+	yGround = yposBlue;
 
 	i_width = 75;
 	i_height = 75;
 
 	currentWindow = document.defaultView;
+	//Escolha dos carateres
 	var queryString = decodeURIComponent(window.location.search);
 	queryString = queryString.substring(1);
 	var queries = queryString.split("&");
@@ -81,18 +84,12 @@ function main(){
 	img_blue = new Image();
 	img_red = new Image();
 	//Carater azul
-	//img_blue.addEventListener("load", imgLoadedHandler);
 	img_blue.id = "blue1";
-	img_blue.src = img_blue_source;  //dá ordem de carregamento da imagem
+	img_blue.src = img_blue_source;
 
 	//Carater vermelho
 	img_red.id = "red1";
 	img_red.src = img_red_source;
-
-	/*canvas = document.getElementById("myCanvas");
-	canvas2 = document.getElementById("canvasBack");
-	ctx = canvas.getContext("2d");
-	ctxBack = canvas2.getContext("2d");*/
 
 	container = new createjs.Container();
 
@@ -110,6 +107,8 @@ function main(){
 	var random = Math.round(Math.random() * (5 - 1)) + 1
 	var background = new Image();
 
+	updateXY(random); //Atualiza os valores x e y default de acordo com o fundo escolhido
+
 	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
 
 	background.onload = function(){
@@ -123,16 +122,16 @@ function main(){
 	img_blue.onload = function(){
 		blueBit = new createjs.Bitmap(img_blue);
 		stage.addChild(blueBit);
-		blueBit.x = 850;
-		blueBit.y = 300;
+		blueBit.x = xposBlue;
+		blueBit.y = yposBlue;
 		drawBlue();
 		setInterval(drawBlue, frameRate);
 	}
 	img_red.onload = function(){
 		redBit = new createjs.Bitmap(img_red);
 		stage.addChild(redBit);
-		redBit.x = 50;
-		redBit.y = 300;
+		redBit.x = xposRed;
+		redBit.y = yposRed;
 		drawRed();
 		setInterval(drawRed, frameRate);
 	}
@@ -316,5 +315,39 @@ function keyUpEvent(evt){
 		clearInterval(intervalRightArrowRed);
 		intervalRightArrowRed = -1;
 		break;
+	}
+}
+
+function updateXY(random){
+	switch(random){
+		case 1:
+		case 5:
+			yposBlue = 360;
+			yposRed = 360;
+			yGround = 360;
+			drawRed();
+			drawBlue();
+			break;
+		case 2:
+			yposBlue = 358;
+			yposRed = 358;
+			yGround = 358;
+			drawRed();
+			drawBlue();
+			break;
+		case 3:
+			yposBlue = 365;
+			yposRed = 365;
+			yGround = 365;
+			drawRed();
+			drawBlue();
+			break;
+		case 4:
+			yposBlue = 332;
+			yposRed = 332;
+			yGround = 332;
+			drawRed();
+			drawBlue();
+			break;
 	}
 }
