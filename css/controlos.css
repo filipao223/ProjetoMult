@@ -14,13 +14,13 @@ button {
   font-family: monospace;
   width : 30%;
   padding : 1.5%;
-  font-size: 250%;
+  font-size: 110%;
   height: auto;
   transition: all 0.5s;
   cursor: pointer;
   align-items: baseline;
   margin-bottom : 0.5%;
-  top : 100px;
+  top : 250px;
   box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
 
