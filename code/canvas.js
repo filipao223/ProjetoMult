@@ -14,12 +14,7 @@ var container;
 var canvas;
 var canvas2;
 var currentWindow;
-var spArray = new Array(1);
-console.log(spArray);
-var ctx;
-var ctxBack;
 
-var sprite;
 var img_blue_source;
 var img_red_source;
 
@@ -35,8 +30,8 @@ var yposBlue;
 var xposRed;
 var yposRed;
 
-var canvas_width;
-var canvas_height;
+var boundaryLeft;
+var boundaryRight;
 
 var i_width;
 var i_height;
@@ -102,8 +97,9 @@ function main(){
 	stageBack.canvas.width = stage.canvas.width;
 	stageBack.canvas.height = stage.canvas.height;
 
-	canvas_width = stage.canvas.width;
-	canvas_height = stage.canvas.height;
+	boundaryLeft = -20;
+	boundaryRight = stage.canvas.width - 280;
+
 	var random = Math.round(Math.random() * (5 - 1)) + 1
 	var background = new Image();
 
@@ -164,7 +160,7 @@ function drawRed(){
 }
 
 function moveLeftBlue(){
-	if(blueBit.x > 0){
+	if(blueBit.x > boundaryLeft){
 		blueBit.x -= 5;
 	}
 	drawBlue();
@@ -172,7 +168,7 @@ function moveLeftBlue(){
 }
 
 function moveLeftRed(){
-	if(redBit.x > 0){
+	if(redBit.x > boundaryLeft){
 		redBit.x -= 5;
 	}
 	drawBlue();
@@ -180,7 +176,7 @@ function moveLeftRed(){
 }
 
 function moveRightRed(){
-	if(redBit.x < canvas_width){
+	if(redBit.x < boundaryRight){
 		redBit.x += 5;
 	}
 	drawBlue();
@@ -188,7 +184,7 @@ function moveRightRed(){
 }
 
 function moveRightBlue(){
-	if(blueBit.x < canvas_width){
+	if(blueBit.x < boundaryRight){
 		blueBit.x += 5;
 	}
 	drawBlue();
