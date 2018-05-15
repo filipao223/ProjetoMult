@@ -9,6 +9,8 @@
 var stage;
 var stageBack;
 
+var container;
+
 var canvas;
 var canvas2;
 var currentWindow;
@@ -23,6 +25,9 @@ var img_red_source;
 
 var img_blue;
 var img_red;
+var backBit; //Bitmaps
+var blueBit;
+var redBit;
 
 var xposBlue;
 var yposBlue;
@@ -89,6 +94,8 @@ function main(){
 	ctx = canvas.getContext("2d");
 	ctxBack = canvas2.getContext("2d");*/
 
+	container = new createjs.Container();
+
 	stageBack = new createjs.Stage("canvasBack");
 
 	stage = new createjs.Stage("myCanvas");
@@ -106,16 +113,26 @@ function main(){
 	background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
 
 	background.onload = function(){
-		var backBit = new createjs.Bitmap("background");
-		stageBack.addChild(background);
-		stage.update();
+		backBit = new createjs.Bitmap(background);
+		container.addChild(backBit);
+		stageBack.addChild(container);
+		container.scaleX = container.scaleY = stageBack.canvas.width / backBit.image.width;
+		stageBack.update();
 	}
 
 	img_blue.onload = function(){
+		blueBit = new createjs.Bitmap(img_blue);
+		stage.addChild(blueBit);
+		blueBit.x = 850;
+		blueBit.y = 300;
 		drawBlue();
 		setInterval(drawBlue, frameRate);
 	}
 	img_red.onload = function(){
+		redBit = new createjs.Bitmap(img_red);
+		stage.addChild(redBit);
+		redBit.x = 50;
+		redBit.y = 300;
 		drawRed();
 		setInterval(drawRed, frameRate);
 	}
@@ -148,32 +165,32 @@ function drawRed(){
 }
 
 function moveLeftBlue(){
-	if(xposBlue > 0){
-		xposBlue -= 5;
+	if(blueBit.x > 0){
+		blueBit.x -= 5;
 	}
 	drawBlue();
 	drawRed();
 }
 
 function moveLeftRed(){
-	if(xposRed > 0){
-		xposRed -= 5;
+	if(redBit.x > 0){
+		redBit.x -= 5;
 	}
 	drawBlue();
 	drawRed();
 }
 
 function moveRightRed(){
-	if(xposRed < canvas_width){
-		xposRed += 5;
+	if(redBit.x < canvas_width){
+		redBit.x += 5;
 	}
 	drawBlue();
 	drawRed();
 }
 
 function moveRightBlue(){
-	if(xposBlue < canvas_width){
-		xposBlue += 5;
+	if(blueBit.x < canvas_width){
+		blueBit.x += 5;
 	}
 	drawBlue();
 	drawRed();
@@ -185,10 +202,10 @@ function moveUpBlue(){ //Jump
 		clearInterval(intervalUpArrowBlue);
 		return;
 	}
-	else if(yposBlue > 0){
-		yposBlue -= (15 + (0-jumpSizeBlue));
+	else if(blueBit.y > 0){
+		blueBit.y -= (15 + (0-jumpSizeBlue));
 	}
-	else if(yposBlue < 0){
+	else if(blueBit.y < 0){
 		intervalMoveDownBlue = setInterval(moveDownBlue, frameRate);
 		clearInterval(intervalUpArrowBlue);
 		return;
@@ -204,10 +221,10 @@ function moveUpRed(){ //Jump
 		clearInterval(intervalUpArrowRed);
 		return;
 	}
-	else if(yposRed > 0){
-		yposRed -= (15 + (0-jumpSizeRed));
+	else if(redBit.y > 0){
+		redBit.y -= (15 + (0-jumpSizeRed));
 	}
-	else if(yposRed < 0){
+	else if(redBit.y < 0){
 		intervalMoveDownRed = setInterval(moveDownRed, frameRate);
 		clearInterval(intervalUpArrowRed);
 		return;
@@ -220,26 +237,26 @@ function moveUpRed(){ //Jump
 
 function moveDownBlue(){
 	console.log("moveDownBlue called!");
-	if(yposBlue != yGround){
-		yposBlue += (jumpMaxBlue - jumpSizeBlue);
+	if(blueBit.y != yGround){
+		blueBit.y += (jumpMaxBlue - jumpSizeBlue);
 	}
-	if (yposBlue == yGround){
+	if (blueBit.y == yGround){
 		clearInterval(intervalMoveDownBlue);
 	}
 	jumpSizeBlue-=1;
-	drawBlue(yGround, yposBlue);
+	drawBlue(yGround, blueBit.y);
 }
 
 function moveDownRed(){
 	console.log("moveDowRed called!");
-	if(yposRed != yGround){
-		yposRed += (jumpMaxRed - jumpSizeRed);
+	if(redBit.y != yGround){
+		redBit.y += (jumpMaxRed - jumpSizeRed);
 	}
-	if (yposRed == yGround){
+	if (redBit.y == yGround){
 		clearInterval(intervalMoveDownRed);
 	}
 	jumpSizeRed-=1;
-	drawRed(yGround, yposRed);
+	drawRed(yGround, redBit.y);
 }
 
 function keyDownEvent(evt){
