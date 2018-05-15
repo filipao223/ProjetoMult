@@ -162,17 +162,24 @@ function drawRed(){
 }
 
 function moveLeftBlue(){
-
-	var mvmt = 5;
-
-	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-mvmt, blueBit.y) == false){
-		console.log("no collision");
+	console.log("MOVE LEFT BLUE");
+	//Se não houver colisao
+	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-5, blueBit.y) == false){
+		console.log("MOVE LEFT BLUE NO COLL");
 		blueBit.x -= 5;
 	}
-	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-mvmt, blueBit.y) == true){
-		console.log("collision");
-		//Verifica se o vermelho pode andar para tras e o azul para a frente
-		if(redBit.x > boundaryLeft){
+
+	//Se houver colisao
+	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-5, blueBit.y) == true){
+		//Se estiver a um certo y do chao, passa por cima
+		if(blueBit.y < yGround - 20){
+			console.log("MOVE LEFT BLUE COL OVER");
+			blueBit.x -= 5;
+		}
+
+		//Não esta a saltar, verifica se o vermelho pode andar para tras e o azul para a frente
+		else if(redBit.x > boundaryLeft){
+			console.log("MOVE LEFT BLUE COL");
 			blueBit.x -= 2;
 			redBit.x -= 2;
 		}
@@ -182,12 +189,21 @@ function moveLeftBlue(){
 }
 
 function moveLeftRed(){
-	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y-5) == false){
+	console.log("MOVE LEFT RED", checkCollision(blueBit, redBit.x-5, redBit.y));
+	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y) == false){
+		console.log("MOVE LEFT RED NO COLL");
 		redBit.x -= 5;
 	}
-	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y-5) == true){
-		//Verifica se o azul pode andar para a frente e o vermelho para tras
-		if(blueBit.x > boundaryLeft){
+	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y) == true){
+		//Se estiver a um certo y do chao, passa por cima
+		if(redBit.y < yGround - 20){
+			console.log("MOVE LEFT RED COL OVER");
+			redBit.x -= 5;
+		}
+
+		//Não esta a saltar, Verifica se o azul pode andar para a frente e o vermelho para tras
+		else if(blueBit.x > boundaryLeft){
+			console.log("MOVE LEFT RED COL");
 			redBit.x += 2;
 			blueBit.x -= 2;
 		}
@@ -197,12 +213,21 @@ function moveLeftRed(){
 }
 
 function moveRightRed(){
+	console.log("MOVE RIGHT RED");
 	if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + 5, redBit.y)==false){
+		console.log("MOVE RIGHT RED NO COL");
 		redBit.x += 5;
 	}
 	else if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + 5, redBit.y)==true){
-		//Verifica se o azul pode andar para tras
-		if(blueBit.x < boundaryRight){
+		//Se estiver a um certo y do chao, passa por cima
+		if(redBit.y < yGround - 20){
+			console.log("MOVE RIGHT RED COL OVER");
+			redBit.x += 5;
+		}
+
+		//Não esta a saltar, verifica se o azul pode andar para tras
+		else if(blueBit.x < boundaryRight){
+			console.log("MOVE RIGHT RED COL");
 			redBit.x += 2;
 			blueBit.x += 2;
 		}
@@ -212,12 +237,21 @@ function moveRightRed(){
 }
 
 function moveRightBlue(){
+	console.log("MOVE RIGHT BLUE");
 	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + 5, blueBit.y)==false){
+		console.log("MOVE RIGHT BLUE NO COL");
 		blueBit.x += 5;
 	}
 	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + 5, blueBit.y)==true){
-		//Verifica se o vermelho pode andar para a frente
-		if(redBit.x < boundaryRight){
+		//Se estiver a um certo y do chao, passa por cima
+		if(blueBit.y < yGround - 20){
+			console.log("MOVE RIGHT BLUE COL OVER");
+			blueBit.x += 5;
+		}
+
+		//Não esta a saltar, Verifica se o vermelho pode andar para a frente
+		else if(redBit.x < boundaryRight){
+			console.log("MOVE RIGHT BLUE COL");
 			blueBit.x += 2;
 			redBit.x += 2;
 		}
