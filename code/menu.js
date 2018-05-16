@@ -22,7 +22,7 @@ function main()
 	});
 
 	campeonatoBtn.addEventListener("click", function(){
-		/*Qualquer coisa*/
+		document.location.href = "campeonato.html";
 	});
 	opcoesBtn.addEventListener("click", function(){
 		document.location.href = "opcoes.html";
