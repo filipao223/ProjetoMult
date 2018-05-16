@@ -204,7 +204,7 @@ function moveLeftRed(){
 		//Não esta a saltar, Verifica se o azul pode andar para a frente e o vermelho para tras
 		else if(blueBit.x > boundaryLeft){
 			console.log("MOVE LEFT RED COL");
-			redBit.x += 2;
+			redBit.x -= 2;
 			blueBit.x -= 2;
 		}
 	}
