@@ -17,18 +17,24 @@ var currentWindow;
 
 var img_blue_source;
 var img_red_source;
+var img_ball_source;
 
 var img_blue;
 var img_red;
+var img_ball;
 var backBit; //Bitmaps
 var blueBit;
 var redBit;
+var ballBit;
 
 var xposBlue;
 var yposBlue;
 
 var xposRed;
 var yposRed;
+
+var xposBall;
+var yposBall;
 
 var boundaryLeft;
 var boundaryRight;
@@ -62,6 +68,8 @@ function main(){
 	yposBlue = 360;
 	xposRed = 50;
 	yposRed = 360;
+    xposBall = 400;
+    yposBall = 525;
 
 	yGround = yposBlue;
 
@@ -76,8 +84,10 @@ function main(){
 
 	img_blue_source = "../resources/images/blueTeam/char"+queries[1]+"_blue.png";
 	img_red_source = "../resources/images/redTeam/char"+queries[0]+"_red.png";
+    img_ball_source = "../resources/images/smallBall.png";
 	img_blue = new Image();
 	img_red = new Image();
+    img_ball = new Image();
 	//Carater azul
 	img_blue.id = "blue1";
 	img_blue.src = img_blue_source;
@@ -87,6 +97,10 @@ function main(){
 	img_red.id = "red1";
 	img_red.src = img_red_source;
 	//img_red.crossOrigin = "anonymous"; // Should work fine
+    
+    //Bola
+    img_ball.id = "ball";
+    img_ball.src = img_ball_source;
 
 	container = new createjs.Container();
 
@@ -133,6 +147,14 @@ function main(){
 		drawRed();
 		setInterval(drawRed, frameRate);
 	}
+    img_ball.onload = function(){
+        ballBit = new createjs.Bitmap(img_ball);
+        stage.addChild(ballBit);
+        ballBit.x = xposBall;
+        ballBit.y = yposBall;
+        stage.update();
+        setInterval(stage.update(), frameRate);
+    }
 
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
@@ -390,6 +412,7 @@ function updateXY(random){
 			yposBlue = 360;
 			yposRed = 360;
 			yGround = 360;
+            yposBall = 360;
 			drawRed();
 			drawBlue();
 			break;
@@ -397,6 +420,7 @@ function updateXY(random){
 			yposBlue = 358;
 			yposRed = 358;
 			yGround = 358;
+            yposBall = 358;
 			drawRed();
 			drawBlue();
 			break;
@@ -404,6 +428,7 @@ function updateXY(random){
 			yposBlue = 365;
 			yposRed = 365;
 			yGround = 365;
+            yposBall = 365;
 			drawRed();
 			drawBlue();
 			break;
@@ -411,6 +436,7 @@ function updateXY(random){
 			yposBlue = 332;
 			yposRed = 332;
 			yGround = 332;
+            yposBall = 332;
 			drawRed();
 			drawBlue();
 			break;
