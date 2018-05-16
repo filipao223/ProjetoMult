@@ -10,7 +10,7 @@ function main()
 {
 	document.getElementById("sairBtn").onclick = function(){
   	self.close();
-  }
+    }
 
 	var simplesBtn = document.getElementById("simplesBtn");
 	var campeonatoBtn = document.getElementById("campeonatoBtn");
