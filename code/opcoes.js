@@ -13,6 +13,8 @@ function main(){
 	queryString = queryString.substring(1);
 	var queries = queryString.split("&");
 
+	audio1.volume = 0.3;
+	
 	if(queries[1] == 0){
 		audio1.volume = 0;
 	}

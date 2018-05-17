@@ -15,6 +15,8 @@ function main()
   var effectsBtn = document.getElementById("efeitos");
   var sairBtn = document.getElementById("sairBtn");
 
+	audio1.volume = 0.3;
+	
   musicBtn.addEventListener("click", function(){
     musicOn = updateMusica(musicOn);
 		audio1.volume = 0;

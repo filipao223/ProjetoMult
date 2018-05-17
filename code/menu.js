@@ -35,6 +35,8 @@ function main()
 		document.location.href = "creditos.html" + "?" + queries[0] + "&" + queries[1];
 	});
 
+	audio1.volume = 0.3;
+
 	if(queries[1] == 0){
 		audio1.volume = 0;
 	}
