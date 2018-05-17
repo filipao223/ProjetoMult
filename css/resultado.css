@@ -1,0 +1,60 @@
+html
+{
+  background-image: url(../resources/images/backgmenucomlogo.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+button {
+    border-radius: 2.5%;;
+    background-color: #99ae35;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-family: monospace;
+    font-size: 250%;
+    padding: 1.5%;
+    width: 30%;
+    height: auto;
+    transition: all 0.5s;
+    cursor: pointer;
+    align-items: baseline;
+    bottom: -100px;
+    margin-bottom: 2.5%;
+    box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
+}
+
+button{
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 25%;
+    right: -10%;
+    transition: 0.5s;
+}
+
+button:hover{
+    padding-right: -3%;
+    padding-left: -2.5%;
+}
+
+button:hover:after {
+    opacity: 1;
+    right: 2%;
+}
+
+p{
+    background-color: #99ae35;
+    font-family: monospace;
+    font-size: 60px;
+    margin-top: 5%;
+    margin-left: 40%;
+    margin-right: 40%;
+}
