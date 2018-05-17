@@ -17,6 +17,10 @@ function main()
   	     document.location.href = "menu.html" + "?" + queries[0] + "&" + queries[1];
   }
 
+	if(queries[1] == 0){
+		audio1.volume =0;
+	}
+
 	var jogoBtn = document.getElementById("jogoBtn");
     var textBox = document.getElementById("numJogadores");
 

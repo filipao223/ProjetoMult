@@ -14,6 +14,10 @@ function main(){
 	queryString = queryString.substring(1);
 	var queries = queryString.split("&");
 
+	if(queries[1] == 0){
+		audio1.volume =0;
+	}
+
 	menuBtn.addEventListener("click", function(){
 		document.location.href = "opcoes.html" + "?" + queries[0] + "&" + queries[1];
 	});

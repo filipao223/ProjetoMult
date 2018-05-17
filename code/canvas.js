@@ -82,6 +82,10 @@ function main(){
 	queryString = queryString.substring(1);
 	var queries = queryString.split("&");
 
+	if(queries[1] == 0){
+		audio1.volume =0;
+	}
+
 	img_blue_source = "../resources/images/blueTeam/char"+queries[3]+"_blue.png";
 	img_red_source = "../resources/images/redTeam/char"+queries[2]+"_red.png";
   img_ball_source = "../resources/images/smallBall.png";

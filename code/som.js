@@ -17,6 +17,7 @@ function main()
 
   musicBtn.addEventListener("click", function(){
     musicOn = updateMusica(musicOn);
+		audio1.volume = 0;
   });
 
   effectsBtn.addEventListener("click", function(){
