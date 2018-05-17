@@ -10,10 +10,15 @@
 		<script type="text/javascript" src="../code/Sprites.js"></script>
 	</head>
 		<body>
-			<canvas id="myCanvas" style="position: absolute; left: 0; top: 0; z-index: 1;">
+			<canvas id="myCanvas" style="position: absolute; z-index: 1;">
 			</canvas>
-			<canvas id="canvasBack" style="position: absolute; left: 0; top: 0; z-index: 0; background-size: 100% 100%;">
+			<canvas id="canvasBack" style="position: absolute; z-index: 0; background-size: 100% 100%;">
 			</canvas>
+
+			<div id="fundoBarra">
+				<div id="progressoBarra"></div>
+			</div>
+
 		</body>
 		<audio id = "audio1" loop autoplay>
 			<source src="../resources/audio/Cuphead-Botanic Panic.mp3">

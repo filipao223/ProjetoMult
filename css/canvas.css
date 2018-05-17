@@ -1,9 +1,7 @@
-myCanvas
-{
+myCanvas{
     padding: 0;
     margin: auto;
     display: inline;
-
 }
 
 canvasBack{
@@ -16,4 +14,16 @@ html{
   background-repeat: no-repeat;
   background-size: cover;
   background-size: 100% 100%;
+}
+
+#fundoBarra{
+    position: relative;
+    top: 620px;
+    width: 100%;
+    background-color: grey;
+}
+#progressoBarra {
+    width: 1%;
+    height: 30px;
+    background-color: blue;
 }

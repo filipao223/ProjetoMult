@@ -75,6 +75,9 @@ var yGround;
 
 var frameRate = 1000/30;
 
+var progressBar = -1;
+var widthProgressBar;
+
 function main(){
 
 	xposBlue = 850;
@@ -187,6 +190,7 @@ function main(){
 
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
+	updateProgressBar(100);
 }
 
 function drawBlue(){
@@ -545,4 +549,25 @@ function updateXY(random){
 function checkCollision(otherBit, newPosX, newPosY){
 	if(otherBit.x == newPosX) return true;
 	else return false;
+}
+
+function updateProgressBar(startFrom){
+	console.log("updateProgressBar called !");
+	var bar = document.getElementById("progressoBarra");
+
+	if(progressBar == -1){
+		widthProgressBar = startFrom;
+		progressBar = setInterval(updateProgressBar, 50);
+	}
+	else{
+		if(widthProgressBar <= 0){
+			clearInterval(progressBar);
+			progressBar = -1;
+		}
+		else{
+			widthProgressBar--;
+			console.log("Bar width", widthProgressBar);
+			bar.style.width = widthProgressBar + "%";
+		}
+	}
 }
