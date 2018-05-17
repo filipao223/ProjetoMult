@@ -64,6 +64,7 @@ var yGround;
 var frameRate = 1000/30;
 
 function main(){
+
 	xposBlue = 850;
 	yposBlue = 360;
 	xposRed = 50;
@@ -82,8 +83,12 @@ function main(){
 	queryString = queryString.substring(1);
 	var queries = queryString.split("&");
 
+	var destiny = "menu.html" + "?" + queries[0] + "&" + queries[1];
+
+	setTimeout(function(){window.location.href="menu.html" + "?" + queries[0] + "&" + queries[1]},300000);
+
 	audio1.volume = 0.3;
-	
+
 	if(queries[1] == 0){
 		audio1.volume =0;
 	}
