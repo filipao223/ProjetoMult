@@ -27,6 +27,18 @@ var blueBit;
 var redBit;
 var ballBit;
 
+var distanceBlue;
+var distanceRed;
+
+var powerTimeBlue;
+var powerTimeRed;
+
+var stopBlue;
+var stopRed;
+
+var powerBlue;
+var powerRed;
+
 var xposBlue;
 var yposBlue;
 
@@ -72,6 +84,12 @@ function main(){
   xposBall = 400;
   yposBall = 525;
 
+	distanceRed = 5;
+	distanceBlue = 5;
+
+	powerRed = 0;
+	powerBlue = 0;
+
 	yGround = yposBlue;
 
 	i_width = 75;
@@ -98,7 +116,7 @@ function main(){
   img_ball_source = "../resources/images/smallBall.png";
 	img_blue = new Image();
 	img_red = new Image();
-    img_ball = new Image();
+  img_ball = new Image();
 	//Carater azul
 	img_blue.id = "blue1";
 	img_blue.src = img_blue_source;
@@ -175,7 +193,7 @@ function drawBlue(){
 	//salto, colocar o intervalo disponivel assim que acabar o salto
 	if(arguments.length != 0){ //yGround, current y
 		if(arguments[0] == arguments[1]){
-			console.log("intervalUpArrowBlue set to -1!");
+			//console.log("intervalUpArrowBlue set to -1!");
 			intervalUpArrowBlue = -1;
 			intervalMoveDownBlue = -1;
 		}
@@ -186,7 +204,7 @@ function drawBlue(){
 function drawRed(){
 	if(arguments.length != 0){
 		if(arguments[0] == arguments[1]){
-			console.log("intervalUpArrowRed set to -1!");
+			//console.log("intervalUpArrowRed set to -1!");
 			intervalUpArrowRed = -1;
 			intervalMoveDownRed = -1;
 		}
@@ -195,28 +213,38 @@ function drawRed(){
 }
 
 function moveLeftBlue(){
-	console.log("MOVE LEFT BLUE");
+	//console.log("MOVE LEFT BLUE");
 	//Se não houver colisao
-	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-5, blueBit.y) == false){
-		console.log("MOVE LEFT BLUE NO COLL");
-		blueBit.x -= 5;
+	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-distanceBlue, blueBit.y) == false){
+		//console.log("MOVE LEFT BLUE NO COLL");
+		blueBit.x -= distanceBlue;
 	}
 
 	//Se houver colisao
-	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-5, blueBit.y) == true){
+	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-distanceBlue, blueBit.y) == true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(blueBit.y < yGround - 20){
-			console.log("MOVE LEFT BLUE COL OVER");
-			blueBit.x -= 5;
-			audio2.play();
+			//console.log("MOVE LEFT BLUE COL OVER");
+			blueBit.x -= distanceBlue;
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 
 		//Não esta a saltar, verifica se o vermelho pode andar para tras e o azul para a frente
 		else if(redBit.x > boundaryLeft){
-			console.log("MOVE LEFT BLUE COL");
+			//console.log("MOVE LEFT BLUE COL");
 			blueBit.x -= 2;
 			redBit.x -= 2;
-			audio2.play();
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 	}
 	drawBlue();
@@ -224,25 +252,35 @@ function moveLeftBlue(){
 }
 
 function moveLeftRed(){
-	console.log("MOVE LEFT RED", checkCollision(blueBit, redBit.x-5, redBit.y));
-	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y) == false){
-		console.log("MOVE LEFT RED NO COLL");
-		redBit.x -= 5;
+	//console.log("MOVE LEFT RED", checkCollision(blueBit, redBit.x-5, redBit.y));
+	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-distanceRed, redBit.y) == false){
+		//console.log("MOVE LEFT RED NO COLL");
+		redBit.x -= distanceRed;
 	}
-	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-5, redBit.y) == true){
+	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-distanceRed, redBit.y) == true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(redBit.y < yGround - 20){
-			console.log("MOVE LEFT RED COL OVER");
-			redBit.x -= 5;
-			audio2.play();
+			//console.log("MOVE LEFT RED COL OVER");
+			redBit.x -= distanceRed;
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 
 		//Não esta a saltar, Verifica se o azul pode andar para a frente e o vermelho para tras
 		else if(blueBit.x > boundaryLeft){
-			console.log("MOVE LEFT RED COL");
+			//console.log("MOVE LEFT RED COL");
 			redBit.x -= 2;
 			blueBit.x -= 2;
-			audio2.play();
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 	}
 	drawBlue();
@@ -250,25 +288,35 @@ function moveLeftRed(){
 }
 
 function moveRightRed(){
-	console.log("MOVE RIGHT RED");
-	if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + 5, redBit.y)==false){
-		console.log("MOVE RIGHT RED NO COL");
-		redBit.x += 5;
+	//console.log("MOVE RIGHT RED");
+	if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + distanceRed, redBit.y)==false){
+		//console.log("MOVE RIGHT RED NO COL");
+		redBit.x += distanceRed;
 	}
-	else if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + 5, redBit.y)==true){
+	else if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + distanceRed, redBit.y)==true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(redBit.y < yGround - 20){
-			console.log("MOVE RIGHT RED COL OVER");
-			redBit.x += 5;
-			audio2.play();
+			//console.log("MOVE RIGHT RED COL OVER");
+			redBit.x += distanceRed;
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 
 		//Não esta a saltar, verifica se o azul pode andar para tras
 		else if(blueBit.x < boundaryRight){
-			console.log("MOVE RIGHT RED COL");
+			//console.log("MOVE RIGHT RED COL");
 			redBit.x += 2;
 			blueBit.x += 2;
-			audio2.play();
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 	}
 	drawBlue();
@@ -276,25 +324,35 @@ function moveRightRed(){
 }
 
 function moveRightBlue(){
-	console.log("MOVE RIGHT BLUE");
-	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + 5, blueBit.y)==false){
-		console.log("MOVE RIGHT BLUE NO COL");
-		blueBit.x += 5;
+	//console.log("MOVE RIGHT BLUE");
+	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + distanceBlue, blueBit.y)==false){
+		//console.log("MOVE RIGHT BLUE NO COL");
+		blueBit.x += distanceBlue;
 	}
-	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + 5, blueBit.y)==true){
+	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + distanceBlue, blueBit.y)==true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(blueBit.y < yGround - 20){
-			console.log("MOVE RIGHT BLUE COL OVER");
-			blueBit.x += 5;
-			audio2.play();
+			//console.log("MOVE RIGHT BLUE COL OVER");
+			blueBit.x += distanceBlue;
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 
 		//Não esta a saltar, Verifica se o vermelho pode andar para a frente
 		else if(redBit.x < boundaryRight){
-			console.log("MOVE RIGHT BLUE COL");
+			//console.log("MOVE RIGHT BLUE COL");
 			blueBit.x += 2;
 			redBit.x += 2;
-			audio2.play();
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[0] == 1){
+				audio2.play();
+			}
 		}
 	}
 	drawBlue();
@@ -366,7 +424,7 @@ function moveDownRed(){
 
 function keyDownEvent(evt){
 	switch(evt.keyCode){
-		//Azul (<, ^, >)
+		//Azul (<, ^, >,spacebar)
 		case 37:
 			if(intervalmoveLeftBlue == -1){
 				intervalmoveLeftBlue = setInterval(moveLeftBlue, 25);
@@ -381,6 +439,28 @@ function keyDownEvent(evt){
 		case 39:
 			if(intervalRightArrowBlue == -1){
 				intervalRightArrowBlue = setInterval(moveRightBlue, 25);
+			}
+			break;
+		case 32:
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[3] == 1){
+				if(powerBlue == 0){
+					powerTimeBlue = Date.now();
+					powerBlue = 1;
+					distanceBlue = distanceBlue * 2;
+					drawBlue();
+					drawRed();
+					console.log("Poder ativado");
+				}
+				else if(powerBlue == 1 && (powerTimeBlue + 30000) <= Date.now()){
+					distanceBlue = distanceBlue * 2;
+					powerTimeBlue = Date.now();
+					drawBlue();
+					drawRed();
+					console.log("Poder ativado");
+				}
 			}
 			break;
 		//vermelho (A, W, D)
@@ -431,7 +511,7 @@ function updateXY(random){
 			yposBlue = 360;
 			yposRed = 360;
 			yGround = 360;
-            yposBall = 360;
+      yposBall = 360;
 			drawRed();
 			drawBlue();
 			break;
