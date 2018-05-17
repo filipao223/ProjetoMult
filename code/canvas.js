@@ -27,9 +27,6 @@ var blueBit;
 var redBit;
 var ballBit;
 
-var distanceBlue;
-var distanceRed;
-
 var powerTimeBlue;
 var powerTimeRed;
 
@@ -41,6 +38,13 @@ var powerRed;
 
 var xposBlue;
 var yposBlue;
+
+var currentPower; //1-velocidade, 2-..., 3-...
+
+var speedBlue=5;
+var speedRed=5;
+var speedBlueCollision = 2;
+var speedRedCollision = 2;
 
 var xposRed;
 var yposRed;
@@ -75,8 +79,12 @@ var yGround;
 
 var frameRate = 1000/30;
 
-var progressBar = -1;
-var widthProgressBar;
+var progressBarEmptyBlue = -1;
+var progressBarEmptyRed = -1;
+var progressBarFillBlue = -1;
+var progressBarFillRed = -1;
+var widthProgressBarBlue = 0;
+var widthProgressBarRed = 0;
 
 function main(){
 
@@ -86,9 +94,6 @@ function main(){
 	yposRed = 360;
   xposBall = 400;
   yposBall = 525;
-
-	distanceRed = 5;
-	distanceBlue = 5;
 
 	powerRed = 0;
 	powerBlue = 0;
@@ -190,7 +195,10 @@ function main(){
 
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
-	updateProgressBar(100);
+
+	//Começa a encher a barra do poder
+	updateProgressBarFillBlue(widthProgressBarBlue);
+	updateProgressBarFillRed(widthProgressBarRed);
 }
 
 function drawBlue(){
@@ -219,30 +227,25 @@ function drawRed(){
 function moveLeftBlue(){
 	//console.log("MOVE LEFT BLUE");
 	//Se não houver colisao
-	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-distanceBlue, blueBit.y) == false){
+	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x- (powerBlue==1?speedBlue/2:speedBlue), blueBit.y) == false){
 		//console.log("MOVE LEFT BLUE NO COLL");
-		blueBit.x -= distanceBlue;
+		blueBit.x -= speedBlue;
 	}
 
 	//Se houver colisao
-	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-distanceBlue, blueBit.y) == true){
+	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-(powerBlue==1?speedBlue/2:speedBlue), blueBit.y) == true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(blueBit.y < yGround - 20){
-			//console.log("MOVE LEFT BLUE COL OVER");
-			blueBit.x -= distanceBlue;
-			var queryString = decodeURIComponent(window.location.search);
-			queryString = queryString.substring(1);
-			var queries = queryString.split("&");
-			if(queries[0] == 1){
-				audio2.play();
-			}
+			blueBit.x -= speedBlue;
 		}
 
 		//Não esta a saltar, verifica se o vermelho pode andar para tras e o azul para a frente
 		else if(redBit.x > boundaryLeft){
 			//console.log("MOVE LEFT BLUE COL");
-			blueBit.x -= 2;
-			redBit.x -= 2;
+			blueBit.x -= speedBlueCollision;
+			redBit.x -= speedRedCollision;
+
+			//Som contacto
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
@@ -257,28 +260,23 @@ function moveLeftBlue(){
 
 function moveLeftRed(){
 	//console.log("MOVE LEFT RED", checkCollision(blueBit, redBit.x-5, redBit.y));
-	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-distanceRed, redBit.y) == false){
+	if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-speedRed, redBit.y) == false){
 		//console.log("MOVE LEFT RED NO COLL");
-		redBit.x -= distanceRed;
+		redBit.x -= speedRed;
 	}
-	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-distanceRed, redBit.y) == true){
+	else if(redBit.x > boundaryLeft && checkCollision(blueBit, redBit.x-speedRed, redBit.y) == true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(redBit.y < yGround - 20){
-			//console.log("MOVE LEFT RED COL OVER");
-			redBit.x -= distanceRed;
-			var queryString = decodeURIComponent(window.location.search);
-			queryString = queryString.substring(1);
-			var queries = queryString.split("&");
-			if(queries[0] == 1){
-				audio2.play();
-			}
+			redBit.x -= speedRed;
 		}
 
 		//Não esta a saltar, Verifica se o azul pode andar para a frente e o vermelho para tras
 		else if(blueBit.x > boundaryLeft){
 			//console.log("MOVE LEFT RED COL");
-			redBit.x -= 2;
-			blueBit.x -= 2;
+			redBit.x -= speedRedCollision;
+			blueBit.x -= speedBlueCollision;
+
+			//Som contacto
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
@@ -293,28 +291,23 @@ function moveLeftRed(){
 
 function moveRightRed(){
 	//console.log("MOVE RIGHT RED");
-	if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + distanceRed, redBit.y)==false){
+	if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x+speedRed, redBit.y)==false){
 		//console.log("MOVE RIGHT RED NO COL");
-		redBit.x += distanceRed;
+		redBit.x += speedRed;
 	}
-	else if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x + distanceRed, redBit.y)==true){
+	else if(redBit.x < boundaryRight && checkCollision(blueBit, redBit.x+speedRed, redBit.y)==true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(redBit.y < yGround - 20){
-			//console.log("MOVE RIGHT RED COL OVER");
-			redBit.x += distanceRed;
-			var queryString = decodeURIComponent(window.location.search);
-			queryString = queryString.substring(1);
-			var queries = queryString.split("&");
-			if(queries[0] == 1){
-				audio2.play();
-			}
+			redBit.x += speedRed;
 		}
 
 		//Não esta a saltar, verifica se o azul pode andar para tras
 		else if(blueBit.x < boundaryRight){
 			//console.log("MOVE RIGHT RED COL");
-			redBit.x += 2;
-			blueBit.x += 2;
+			redBit.x += speedRedCollision;
+			blueBit.x += speedBlueCollision;
+
+			//Som contacto
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
@@ -329,28 +322,23 @@ function moveRightRed(){
 
 function moveRightBlue(){
 	//console.log("MOVE RIGHT BLUE");
-	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + distanceBlue, blueBit.y)==false){
+	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x+(powerBlue==1&&currentPower==1?speedBlue/2:speedBlue), blueBit.y)==false){
 		//console.log("MOVE RIGHT BLUE NO COL");
-		blueBit.x += distanceBlue;
+		blueBit.x += speedBlue;
 	}
-	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x + distanceBlue, blueBit.y)==true){
+	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x+(powerBlue==1&&currentPower==1?speedBlue/2:speedBlue), blueBit.y)==true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(blueBit.y < yGround - 20){
-			//console.log("MOVE RIGHT BLUE COL OVER");
-			blueBit.x += distanceBlue;
-			var queryString = decodeURIComponent(window.location.search);
-			queryString = queryString.substring(1);
-			var queries = queryString.split("&");
-			if(queries[0] == 1){
-				audio2.play();
-			}
+			blueBit.x += speedBlue;
 		}
 
 		//Não esta a saltar, Verifica se o vermelho pode andar para a frente
 		else if(redBit.x < boundaryRight){
 			//console.log("MOVE RIGHT BLUE COL");
-			blueBit.x += 2;
-			redBit.x += 2;
+			blueBit.x += speedBlueCollision;
+			redBit.x += speedRedCollision;
+
+			//Som contacto
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
@@ -445,24 +433,15 @@ function keyDownEvent(evt){
 				intervalRightArrowBlue = setInterval(moveRightBlue, 25);
 			}
 			break;
-		case 32:
+		case 80:
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
 			if(queries[3] == 1){
-				if(powerBlue == 0){
-					powerTimeBlue = Date.now();
+				if(powerBlue == 0 && progressBarFillBlue == -1){
 					powerBlue = 1;
-					distanceBlue = distanceBlue * 2;
-					drawBlue();
-					drawRed();
-					console.log("Poder ativado");
-				}
-				else if(powerBlue == 1 && (powerTimeBlue + 30000) <= Date.now()){
-					distanceBlue = distanceBlue * 2;
-					powerTimeBlue = Date.now();
-					drawBlue();
-					drawRed();
+					poderSelect(1, "blue", "enable");
+					updateProgressBarEmptyBlue(widthProgressBarBlue);
 					console.log("Poder ativado");
 				}
 			}
@@ -484,6 +463,18 @@ function keyDownEvent(evt){
 				intervalRightArrowRed = setInterval(moveRightRed, 25);
 			}
 			break;
+		case 32:
+			var queryString = decodeURIComponent(window.location.search);
+			queryString = queryString.substring(1);
+			var queries = queryString.split("&");
+			if(queries[3] == 1){
+				if(powerRed == 0 && progressBarFillRed == -1){
+					powerRed = 1;
+					poderSelect(1, "red", "enable");
+					updateProgressBarEmptyRed(widthProgressBarRed);
+					console.log("Poder ativado");
+				}
+			}
 	}
 }
 
@@ -551,23 +542,111 @@ function checkCollision(otherBit, newPosX, newPosY){
 	else return false;
 }
 
-function updateProgressBar(startFrom){
-	console.log("updateProgressBar called !");
-	var bar = document.getElementById("progressoBarra");
+function updateProgressBarEmptyBlue(startFrom){
+	//console.log("updateProgressBar called !");
+	var bar = document.getElementById("progressoBarraAzul");
 
-	if(progressBar == -1){
-		widthProgressBar = startFrom;
-		progressBar = setInterval(updateProgressBar, 50);
+	if(progressBarEmptyBlue == -1 && progressBarFillBlue == -1){
+		widthProgressBarBlue = startFrom;
+		progressBarEmptyBlue = setInterval(updateProgressBarEmptyBlue, 50);
 	}
 	else{
-		if(widthProgressBar <= 0){
-			clearInterval(progressBar);
-			progressBar = -1;
+		if(widthProgressBarBlue <= 0){
+			clearInterval(progressBarEmptyBlue);
+			progressBarEmptyBlue = -1;
+
+			progressBarFillBlue = setInterval(updateProgressBarFillBlue, 150);
+
+			powerBlue = 0;
+			poderSelect(1, "blue", "clear");
 		}
 		else{
-			widthProgressBar--;
-			console.log("Bar width", widthProgressBar);
-			bar.style.width = widthProgressBar + "%";
+			widthProgressBarBlue--;
+			//console.log("Bar width", widthProgressBar);
+			bar.style.width = widthProgressBarBlue + "%";
+			bar.innerHTML = widthProgressBarBlue * 1 + "%";
 		}
+	}
+}
+
+function updateProgressBarEmptyRed(startFrom){
+	//console.log("updateProgressBar called !");
+	var bar = document.getElementById("progressoBarraVerm");
+
+	if(progressBarEmptyRed == -1 && progressBarFillRed == -1){
+		widthProgressBarRed = startFrom;
+		progressBarEmptyRed = setInterval(updateProgressBarEmptyRed, 50);
+	}
+	else{
+		if(widthProgressBarRed <= 0){
+			clearInterval(progressBarEmptyRed);
+			progressBarEmptyRed = -1;
+
+			progressBarFillRed = setInterval(updateProgressBarFillRed, 150);
+
+			powerRed = 0;
+			poderSelect(1, "red", "clear");
+		}
+		else{
+			widthProgressBarRed--;
+			//console.log("Bar width", widthProgressBar);
+			bar.style.width = widthProgressBarRed + "%";
+			bar.innerHTML = widthProgressBarRed * 1 + "%";
+		}
+	}
+}
+
+function updateProgressBarFillBlue(jogador){
+	var bar = document.getElementById("progressoBarraAzul");
+
+	if(progressBarFillBlue == -1){
+		progressBarFillBlue = setInterval(updateProgressBarFillBlue, 150);
+	}
+	else{
+		if(widthProgressBarBlue >= 100){
+			clearInterval(progressBarFillBlue);
+			progressBarFillBlue = -1;
+		}
+		else{
+			widthProgressBarBlue++;
+			//console.log("Bar width", widthProgressBar);
+			bar.style.width = widthProgressBarBlue + "%";
+			bar.innerHTML = widthProgressBarBlue * 1 + "%";
+		}
+	}
+}
+
+function updateProgressBarFillRed(jogador){
+	var bar = document.getElementById("progressoBarraVerm");
+
+	if(progressBarFillRed == -1){
+		progressBarFillRed = setInterval(updateProgressBarFillRed, 150);
+	}
+	else{
+		if(widthProgressBarRed >= 100){
+			clearInterval(progressBarFillRed);
+			progressBarFillRed = -1;
+		}
+		else{
+			widthProgressBarRed++;
+			//console.log("Bar width", widthProgressBar);
+			bar.style.width = widthProgressBarRed + "%";
+			bar.innerHTML = widthProgressBarRed * 1 + "%";
+		}
+	}
+}
+
+function poderSelect(num, jogador, estado){
+	console.log("ESTADO", estado);
+	switch(num){
+		case 1:
+			if(jogador === "blue"){
+				if(estado === "enable") speedBlue = 10;
+				else speedBlue = 5;
+			}
+			else{
+				if(estado === "enable") speedRed = 10;
+				else speedRed = 5;
+			}
 	}
 }
