@@ -111,7 +111,7 @@ function main(){
 
 	var destiny = "menu.html" + "?" + queries[0] + "&" + queries[1];
 
-	setTimeout(function(){window.location.href="menu.html" + "?" + queries[0] + "&" + queries[1]},300000);
+	setTimeout(function(){window.location.href="../html/resultado.html" + "?" + queries[0] + "&" + queries[1]},300000);
 
 	audio1.volume = 0.3;
 
