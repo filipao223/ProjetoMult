@@ -201,6 +201,7 @@ function moveLeftBlue(){
 		if(blueBit.y < yGround - 20){
 			console.log("MOVE LEFT BLUE COL OVER");
 			blueBit.x -= 5;
+			audio2.play();
 		}
 
 		//Não esta a saltar, verifica se o vermelho pode andar para tras e o azul para a frente
@@ -208,6 +209,7 @@ function moveLeftBlue(){
 			console.log("MOVE LEFT BLUE COL");
 			blueBit.x -= 2;
 			redBit.x -= 2;
+			audio2.play();
 		}
 	}
 	drawBlue();
@@ -225,6 +227,7 @@ function moveLeftRed(){
 		if(redBit.y < yGround - 20){
 			console.log("MOVE LEFT RED COL OVER");
 			redBit.x -= 5;
+			audio2.play();
 		}
 
 		//Não esta a saltar, Verifica se o azul pode andar para a frente e o vermelho para tras
@@ -232,6 +235,7 @@ function moveLeftRed(){
 			console.log("MOVE LEFT RED COL");
 			redBit.x -= 2;
 			blueBit.x -= 2;
+			audio2.play();
 		}
 	}
 	drawBlue();
@@ -249,6 +253,7 @@ function moveRightRed(){
 		if(redBit.y < yGround - 20){
 			console.log("MOVE RIGHT RED COL OVER");
 			redBit.x += 5;
+			audio2.play();
 		}
 
 		//Não esta a saltar, verifica se o azul pode andar para tras
@@ -256,6 +261,7 @@ function moveRightRed(){
 			console.log("MOVE RIGHT RED COL");
 			redBit.x += 2;
 			blueBit.x += 2;
+			audio2.play();
 		}
 	}
 	drawBlue();
@@ -273,6 +279,7 @@ function moveRightBlue(){
 		if(blueBit.y < yGround - 20){
 			console.log("MOVE RIGHT BLUE COL OVER");
 			blueBit.x += 5;
+			audio2.play();
 		}
 
 		//Não esta a saltar, Verifica se o vermelho pode andar para a frente
@@ -280,6 +287,7 @@ function moveRightBlue(){
 			console.log("MOVE RIGHT BLUE COL");
 			blueBit.x += 2;
 			redBit.x += 2;
+			audio2.play();
 		}
 	}
 	drawBlue();

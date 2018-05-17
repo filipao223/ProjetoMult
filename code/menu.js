@@ -36,7 +36,7 @@ function main()
 	});
 
 	if(queries[1] == 0){
-		audio1.volume =0;
+		audio1.volume = 0;
 	}
 
 }
