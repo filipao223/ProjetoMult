@@ -5,24 +5,24 @@ html{
 }
 
 button {
-  display: block;
   border-radius : 2.5%;
   background-color: #99ae35;
   border: none;
   color: #fff;
   text-align: center;
   font-family: monospace;
-  width : 30%;
+  width : 20%;
   padding : 1.5%;
   font-size: 110%;
   height: auto;
   transition: all 0.5s;
-  cursor: pointer;
   align-items: baseline;
   margin-bottom : 0.5%;
-  top : 250px;
+  top:250px;
   box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }
+
+/*top:250px*/
 
 button{
     cursor: pointer;
@@ -43,7 +43,6 @@ button1 {
     font-size: 110%;
     height: auto;
     transition: all 0.5s;
-    cursor: pointer;
     align-items: baseline;
     margin-bottom : 0.5%;
     margin-left: 15%;
@@ -71,7 +70,6 @@ button2 {
     font-size: 110%;
     height: auto;
     transition: all 0.5s;
-    cursor: pointer;
     align-items: baseline;
     margin-bottom : 0.5%;
     bottom: 20px;

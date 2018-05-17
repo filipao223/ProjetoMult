@@ -6,10 +6,12 @@
 }());
 
 function main(){
+	var queryString = decodeURIComponent(window.location.search);
+	queryString = queryString.substring(1);
+	var queries = queryString.split("&");
 
-}
-
-function backToMain()
-{
-	document.location.href = "menu.html";
+	menuBtn.addEventListener("click", function(){
+		document.location.href = "menu.html" + "?" + queries[0] + "&" + queries[1];
+	});
+	
 }

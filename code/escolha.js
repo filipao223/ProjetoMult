@@ -7,6 +7,9 @@
 
 function main()
 {
+		var queryString = decodeURIComponent(window.location.search);
+		queryString = queryString.substring(1);
+		var queries = queryString.split("&");
 
     var numImgBlue = 1;
     var photoBlue = document.getElementById("photoBlue");
@@ -37,11 +40,11 @@ function main()
         }, true);
 
 		menuBtn.addEventListener("click", function(){
-			document.location.href = "menu.html";
+			document.location.href = "menu.html" + "?" + queries[0] + "&" + queries[1];
 		});
 
 		jogarBtn.addEventListener("click", function(){
-			document.location.href = "canvas.html" + "?" +numImgRed + "&" + numImgBlue;
+			document.location.href = "canvas.html" + "?" + queries[0] + "&" + queries[1]+ "&" + numImgRed + "&" + numImgBlue;
 		});
 }
 

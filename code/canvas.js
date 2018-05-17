@@ -68,8 +68,8 @@ function main(){
 	yposBlue = 360;
 	xposRed = 50;
 	yposRed = 360;
-    xposBall = 400;
-    yposBall = 525;
+  xposBall = 400;
+  yposBall = 525;
 
 	yGround = yposBlue;
 
@@ -82,9 +82,9 @@ function main(){
 	queryString = queryString.substring(1);
 	var queries = queryString.split("&");
 
-	img_blue_source = "../resources/images/blueTeam/char"+queries[1]+"_blue.png";
-	img_red_source = "../resources/images/redTeam/char"+queries[0]+"_red.png";
-    img_ball_source = "../resources/images/smallBall.png";
+	img_blue_source = "../resources/images/blueTeam/char"+queries[3]+"_blue.png";
+	img_red_source = "../resources/images/redTeam/char"+queries[2]+"_red.png";
+  img_ball_source = "../resources/images/smallBall.png";
 	img_blue = new Image();
 	img_red = new Image();
     img_ball = new Image();
@@ -97,7 +97,7 @@ function main(){
 	img_red.id = "red1";
 	img_red.src = img_red_source;
 	//img_red.crossOrigin = "anonymous"; // Should work fine
-    
+
     //Bola
     img_ball.id = "ball";
     img_ball.src = img_ball_source;

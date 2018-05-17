@@ -12,22 +12,30 @@ function main()
   	self.close();
     }
 
+		var queryString = decodeURIComponent(window.location.search);
+		queryString = queryString.substring(1);
+		var queries = queryString.split("&");
+
 	var simplesBtn = document.getElementById("simplesBtn");
 	var campeonatoBtn = document.getElementById("campeonatoBtn");
 	var opcoesBtn = document.getElementById("opcoesBtn");
 	var creditosBtn = document.getElementById("creditosBtn");
 
 	simplesBtn.addEventListener("click", function(){
-		document.location.href = "escolha.html";
+		document.location.href = "escolha.html" + "?" + queries[0] + "&" + queries[1];
 	});
 
 	campeonatoBtn.addEventListener("click", function(){
-		document.location.href = "campeonato.html";
+		document.location.href = "campeonato.html" + "?" + queries[0] + "&" + queries[1];
 	});
 	opcoesBtn.addEventListener("click", function(){
-		document.location.href = "opcoes.html";
+		document.location.href = "opcoes.html" + "?" + queries[0] + "&" + queries[1];
 	});
 	creditosBtn.addEventListener("click", function(){
-		document.location.href = "creditos.html";
+		document.location.href = "creditos.html" + "?" + queries[0] + "&" + queries[1];
 	});
+
+	audio1.loop = true;
+	audio1.autoplay = true;
+
 }

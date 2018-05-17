@@ -7,9 +7,6 @@
 
 function main()
 {
-	document.getElementById("sairBtn").onclick = function(){
-        self.close();
-  }
 
   var musicOn = 1;
   var effectsOn = 1;
@@ -20,26 +17,14 @@ function main()
 
   musicBtn.addEventListener("click", function(){
     musicOn = updateMusica(musicOn);
-    if(musicOn){
-      /*Ligar musica*/
-    }
-    else{
-      /*Desligar musica*/
-    }
   });
 
   effectsBtn.addEventListener("click", function(){
     effectsOn = updateEfeitos(effectsOn);
-    if(effectsOn){
-      /*Desligar efeitos*/
-    }
-    else{
-      /*Desligar efeitos*/
-    }
   })
 
   sairBtn.addEventListener("click", function(){
-    document.location.href = "opcoes.html"
+    document.location.href = "opcoes.html" + "?" + effectsOn + "&" + musicOn;
   })
 }
 
