@@ -83,9 +83,6 @@ var yGround;
 var yGroundBall = 620;
 var yGoal = 580;
 
-var goalsBlue = 0;
-var goalsRed = 0;
-
 var frameRate = 1000/30;
 var frameRateJumpBlue = frameRate;
 var frameRateJumpRed = frameRate;
@@ -97,8 +94,8 @@ var progressBarFillRed = -1;
 var widthProgressBarBlue = 0;
 var widthProgressBarRed = 0;
 
-var golosRed;
-var golosBlue;
+var golosRed=0;
+var golosBlue=0;
 
 var queryString;
 var queries;
@@ -127,9 +124,6 @@ function main(){
 	queries = queryString.split("&");
 
 	var destiny = "menu.html" + "?" + queries[0] + "&" + queries[1];
-
-	golosRed = 0;
-	golosBlue = 0;
 
 	setTimeout(function(){window.location.href="../html/resultado.html" + "?" + queries[0] + "&" + queries[1] + "&" + golosRed + "&" + golosBlue},300000);
 
@@ -837,11 +831,12 @@ function poderSelect(num, jogador, estado){ //Poder 1-> speed x2 para o outro ||
 	}
 }
 
+
 function checkGoal(){
 	if(ballBit.x > boundaryRight && ballBit.y > yGoal){
-		goalsRed++;
+		golosRed++;
 	}
 	if(ballBit.x < boundaryLeft && ballBit.y > yGoal){
-		goalsBlue++;
+		golosBlue++;
 	}
 }
