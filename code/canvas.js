@@ -611,6 +611,7 @@ function updateXY(random){
 		xposBall = 652;
 		yposBall = 525;
 		yGround = yposBlue;
+        yGroundBall = 590;
 			drawRed();
 			drawBlue();
 			break;
