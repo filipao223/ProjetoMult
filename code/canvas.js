@@ -195,6 +195,7 @@ function main(){
     ballBit.x = xposBall;
     ballBit.y = yposBall;
     stage.update();
+		ballGoingDown = setInterval(ballMoveDown, frameRate);
     setInterval(drawBall, frameRate);
   }
 
@@ -230,20 +231,16 @@ function drawRed(){
 }
 
 function drawBall(){
-	console.log("drawBall");
-	if(ballGoingDown == -1 && ballBit.y < yGroundBall){
-		console.log("Set ballGoingDown");
+	if(ballGoingDown == -1 && ballBit.y < yGroundBall && ballGoingUp == -1){
 		ballGoingDown = setInterval(ballMoveDown, frameRate);
 	}
 	if(ballGoingUp == -1 && ballBit.y >= yGroundBall){
-		console.log("Set ballGoingUp");
 		ballGoingUp = setInterval(ballMoveUp, frameRate);
 	}
 	stage.update();
 }
 
 function ballMoveDown(){
-	console.log("ballMovingDown");
 	if(ballBit.y < yGroundBall){
 		ballBit.y += speedBall;
 	}
@@ -252,15 +249,11 @@ function ballMoveDown(){
 		ballGoingDown = -1;
 		speedBall *= 0.7;
 		speedBall = Math.floor(speedBall);
-		console.log(speedBall, "after");
 	}
-	console.log(speedBall);
 	speedBall+=1;
 }
-//Ola
 
 function ballMoveUp(){
-	console.log("ballMovingUp");
 	//Atualiza speedBall
 	if(speedBall > 0){
 		ballBit.y -= speedBall;
