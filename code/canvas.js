@@ -237,6 +237,10 @@ function drawBall(){
 	if(ballGoingUp == -1 && ballBit.y >= yGroundBall){
 		ballGoingUp = setInterval(ballMoveUp, frameRate);
 	}
+    if(ballBit.y == yGroundBall-10 && speedBall <= 1){
+        ballBit.y = yGroundBall;
+        speedBall = 0;
+    }
 	stage.update();
 }
 
@@ -291,10 +295,11 @@ function ballMoveRight(speedHit){
 }
 
 function moveLeftBlue(){
-	//console.log("MOVE LEFT BLUE");
+	console.log("MOVE LEFT BLUE");
 	//Colisao com a bola
 	if(checkCollision(ballBit, blueBit.x-speedBlue, blueBit.y)){
 		ballMoveLeft(speedBlue);
+        console.log("Ball Collision");
 	}
 
 	//Se não houver colisao
