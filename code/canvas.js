@@ -81,6 +81,10 @@ var jumpMaxRed = 16;
 
 var yGround;
 var yGroundBall = 620;
+var yGoal = 580;
+
+var goalsBlue = 0;
+var goalsRed = 0;
 
 var frameRate = 1000/30;
 var frameRateJumpBlue = frameRate;
@@ -758,5 +762,14 @@ function poderSelect(num, jogador, estado){ //Poder 1-> speed x2 para o outro ||
 				else frameRateJumpBlue = frameRate;
 			}
 			break;
+	}
+}
+
+function checkGoal(){
+	if(ballBit.x > boundaryRight && ballBit.y > yGoal){
+		goalsRed++;
+	}
+	if(ballBit.x < boundaryLeft && ballBit.y > yGoal){
+		goalsBlue++;
 	}
 }
