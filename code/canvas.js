@@ -83,6 +83,8 @@ var yGround;
 var yGroundBall = 620;
 
 var frameRate = 1000/30;
+var frameRateJumpBlue = frameRate;
+var frameRateJumpRed = frameRate;
 
 var progressBarEmptyBlue = -1;
 var progressBarEmptyRed = -1;
@@ -90,6 +92,9 @@ var progressBarFillBlue = -1;
 var progressBarFillRed = -1;
 var widthProgressBarBlue = 0;
 var widthProgressBarRed = 0;
+
+var queryString;
+var queries;
 
 function main(){
 
@@ -110,9 +115,9 @@ function main(){
 
 	currentWindow = document.defaultView;
 	//Escolha dos carateres
-	var queryString = decodeURIComponent(window.location.search);
+	queryString = decodeURIComponent(window.location.search);
 	queryString = queryString.substring(1);
-	var queries = queryString.split("&");
+	queries = queryString.split("&");
 
 	var destiny = "menu.html" + "?" + queries[0] + "&" + queries[1];
 
@@ -141,9 +146,9 @@ function main(){
 	img_red.src = img_red_source;
 	//img_red.crossOrigin = "anonymous"; // Should work fine
 
-    //Bola
-    img_ball.id = "ball";
-    img_ball.src = img_ball_source;
+  //Bola
+  img_ball.id = "ball";
+  img_ball.src = img_ball_source;
 
 	container = new createjs.Container();
 
@@ -338,17 +343,15 @@ function ballMoveUp(){
 }
 
 function ballMoveLeft(speedHit){
-	if(checkCollision(redBit, ballBit.x + speedHit, ballBit.y)){
+	if(checkCollision(redBit, ballBit.x + speedHit, ballBit.y) || checkCollision(blueBit, ballBit.x + speedHit, ballBit.y)){
 		//
-	}
-	if(checkCollision(blueBit, ballBit.x + speedHit, ballBit.y) == true){
-		console.log("colisao");
 	}
 	else{
 		if(ballBit.x > boundaryLeft){
 			ballBit.x -= speedHit;
 		}
 	}
+
 	speedHit-=1;
 }
 
@@ -365,12 +368,6 @@ function ballMoveRight(speedHit){
 }
 
 function moveLeftBlue(){
-	console.log("MOVE LEFT BLUE");
-	//Colisao com a bola
-	if(checkCollision(ballBit, blueBit.x-speedBlue, blueBit.y) == true){
-		ballMoveLeft(speedBlue);
-        console.log("Ball Collision");
-	}
 
 	//Se não houver colisao
 	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-speedBlue, blueBit.y) == false){
@@ -499,7 +496,7 @@ function moveRightBlue(){
 
 function moveUpBlue(){ //Jump
 	if(jumpSizeBlue > jumpMaxBlue){
-		intervalMoveDownBlue = setInterval(moveDownBlue, frameRate);
+		intervalMoveDownBlue = setInterval(moveDownBlue, frameRateJumpBlue);
 		clearInterval(intervalUpArrowBlue);
 		return;
 	}
@@ -507,7 +504,7 @@ function moveUpBlue(){ //Jump
 		blueBit.y -= (15 + (0-jumpSizeBlue));
 	}
 	else if(blueBit.y < 0){
-		intervalMoveDownBlue = setInterval(moveDownBlue, frameRate);
+		intervalMoveDownBlue = setInterval(moveDownBlue, frameRateJumpBlue);
 		clearInterval(intervalUpArrowBlue);
 		return;
 	}
@@ -518,7 +515,7 @@ function moveUpBlue(){ //Jump
 
 function moveUpRed(){ //Jump
 	if(jumpSizeRed > jumpMaxRed){
-		intervalMoveDownRed = setInterval(moveDownRed, frameRate);
+		intervalMoveDownRed = setInterval(moveDownRed, frameRateJumpRed);
 		clearInterval(intervalUpArrowRed);
 		return;
 	}
@@ -526,7 +523,7 @@ function moveUpRed(){ //Jump
 		redBit.y -= (15 + (0-jumpSizeRed));
 	}
 	else if(redBit.y < 0){
-		intervalMoveDownRed = setInterval(moveDownRed, frameRate);
+		intervalMoveDownRed = setInterval(moveDownRed, frameRateJumpRed);
 		clearInterval(intervalUpArrowRed);
 		return;
 	}
@@ -571,7 +568,7 @@ function keyDownEvent(evt){
 		case 38:
 			if(intervalUpArrowBlue == -1){
 				jumpSizeBlue = 0;
-				intervalUpArrowBlue = setInterval(moveUpBlue, frameRate);
+				intervalUpArrowBlue = setInterval(moveUpBlue, frameRateJumpBlue);
 			}
 			break;
 		case 39:
@@ -583,14 +580,12 @@ function keyDownEvent(evt){
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
-			if(queries[3] == 1){
-				if(powerBlue == 0 && progressBarFillBlue == -1){
-					powerBlue = 1;
-					poderSelect(1, "blue", "enable");
-					updateProgressBarEmptyBlue(widthProgressBarBlue);
-					console.log("Poder ativado");
-				}
+			if(powerBlue == 0 && progressBarFillBlue == -1){
+				powerBlue = 1;
+				poderSelect(queries[3], "blue", "enable");
+				updateProgressBarEmptyBlue(widthProgressBarBlue);
 			}
+
 			break;
 		//vermelho (A, W, D)
 		case 65:
@@ -601,7 +596,7 @@ function keyDownEvent(evt){
 		case 87:
 			if(intervalUpArrowRed == -1){
 				jumpSizeRed = 0;
-				intervalUpArrowRed = setInterval(moveUpRed, frameRate);
+				intervalUpArrowRed = setInterval(moveUpRed, frameRateJumpRed);
 			}
 			break;
 		case 68:
@@ -613,19 +608,10 @@ function keyDownEvent(evt){
 			var queryString = decodeURIComponent(window.location.search);
 			queryString = queryString.substring(1);
 			var queries = queryString.split("&");
-			if(queries[3] == 1){
-				if(powerRed == 0 && progressBarFillRed == -1){
-					poderSelect(1, "red", "enable");
-					updateProgressBarEmptyRed(widthProgressBarRed);
-					console.log("Poder ativado");
-				}
-			}
-			if(queries[3] == 2){
-				if(powerRed == 0 && progressBarFillRed == -1){
-					poderSelect(2, "red", "enable");
-					updateProgressBarEmptyRed(widthProgressBarRed);
-					console.log("Poder ativado");
-				}
+			if(powerRed == 0 && progressBarFillRed == -1){
+				powerRed = 1;
+				poderSelect(queries[2], "red", "enable");
+				updateProgressBarEmptyRed(widthProgressBarRed);
 			}
 	}
 }
@@ -693,7 +679,7 @@ function updateXY(random){
 		xposBall = 652;
 		yposBall = 525;
 		yGround = yposBlue;
-            yGroundBall = 590;
+        yGroundBall = 590;
 			drawRed();
 			drawBlue();
 			break;
@@ -721,7 +707,7 @@ function updateProgressBarEmptyBlue(startFrom){
 			progressBarFillBlue = setInterval(updateProgressBarFillBlue, 150);
 
 			powerBlue = 0;
-			poderSelect(1, "blue", "clear");
+			poderSelect(queries[3], "blue", "clear");
 		}
 		else{
 			widthProgressBarBlue--;
@@ -748,7 +734,7 @@ function updateProgressBarEmptyRed(startFrom){
 			progressBarFillRed = setInterval(updateProgressBarFillRed, 150);
 
 			powerRed = 0;
-			poderSelect(1, "red", "clear");
+			poderSelect(queries[2], "red", "clear");
 		}
 		else{
 			widthProgressBarRed--;
@@ -799,27 +785,46 @@ function updateProgressBarFillRed(jogador){
 	}
 }
 
-function poderSelect(num, jogador, estado){
-	console.log("ESTADO", estado);
+function poderSelect(num, jogador, estado){ //Poder 1-> speed x2 para o outro || Poder 2-> speed /2 para o outro  || Poder->3->Baixa gravidade para o outro jog
+	console.log(num);
 	switch(num){
 		case 1:
+		case "1":
+		console.log("case 1");
 			if(jogador === "blue"){
 				if(estado === "enable") speedBlue = 10;
 				else speedBlue = 5;
+				console.log("Current speed -> ", speedBlue);
 			}
 			else{
 				if(estado === "enable") speedRed = 10;
 				else speedRed = 5;
+				console.log("Current speed -> ", speedBlue);
 			}
-		break;
+			break;
 		case 2:
-		if(jogador === "blue"){
-			if(estado === "enable") speedRed = 2;
-			else speedRed = 2;
-		}
-		else{
-			if(estado === "enable") speedBlue = 2;
-			else speedBlue = 2;
-		}
+		case "2":
+		console.log("case 2");
+			if(jogador === "blue"){
+				if(estado === "enable") speedRed = 3;
+				else speedRed = 5;
+			}
+			else{
+				if(estado === "enable") speedBlue = 3;
+				else speedBlue = 5;
+			}
+			break;
+		case 3:
+		case "3":
+		console.log("case 3");
+			if(jogador === "blue"){
+				if(estado === "enable") frameRateJumpRed*=2;
+				else frameRateJumpRed = frameRate;
+			}
+			else{
+				if(estado === "enable") frameRateJumpBlue *= 2;
+				else frameRateJumpBlue = frameRate;
+			}
+			break;
 	}
 }
