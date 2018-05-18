@@ -124,6 +124,7 @@ function main(){
 		audio1.volume =0;
 	}
 
+<<<<<<< Updated upstream
 	img_blue_source = "../resources/images/blueTeam/char"+queries[3]+"_blue.png";
 	img_red_source = "../resources/images/redTeam/char"+queries[2]+"_red.png";
   img_ball_source = "../resources/images/smallBall.png";
@@ -189,6 +190,73 @@ function main(){
 		drawRed();
 		setInterval(drawRed, frameRate);
 	}
+=======
+    img_blue_source = "../resources/images/blueTeam/char"+queries[3]+"_blue.png";
+    img_red_source = "../resources/images/redTeam/char"+queries[2]+"_red.png";
+  	img_ball_source = "../resources/images/smallBall.png";
+    img_blue = new Image();
+    img_red = new Image();
+  	img_ball = new Image();
+    //Carater azul
+    img_blue.id = "blue1";
+    img_blue.src = img_blue_source;
+    //img_blue.crossOrigin = "anonymous"; // Should work fine
+
+    //Carater vermelho
+    img_red.id = "red1";
+    img_red.src = img_red_source;
+    //img_red.crossOrigin = "anonymous"; // Should work fine
+
+  //Bola
+  img_ball.id = "ball";
+  img_ball.src = img_ball_source;
+
+    container = new createjs.Container();
+
+    stageBack = new createjs.Stage("canvasBack");
+
+    stage = new createjs.Stage("myCanvas");
+    stage.canvas.width = 1386;
+    stage.canvas.height = 684;
+
+    stageBack.canvas.width = stage.canvas.width;
+    stageBack.canvas.height = stage.canvas.height;
+
+    boundaryLeft = -20;
+    boundaryRight = stage.canvas.width - 280;
+
+    var random = Math.round(Math.random() * (5 - 1)) + 1
+    var background = new Image();
+
+    updateXY(random); //Atualiza os valores x e y default de acordo com o fundo escolhido
+
+    background.src = "../resources/images/backgrounds/bg"+random+"_f.png";
+
+    background.onload = function(){
+        backBit = new createjs.Bitmap(background);
+        container.addChild(backBit);
+        stageBack.addChild(container);
+        container.scaleX = container.scaleY = stageBack.canvas.width / backBit.image.width;
+        stageBack.update();
+    }
+
+    img_blue.onload = function(){
+        blueBit = new createjs.Bitmap(img_blue);
+        stage.addChild(blueBit);
+        blueBit.x = xposBlue;
+        blueBit.y = yposBlue;
+        drawBlue();
+        setInterval(drawBlue, frameRate);
+    }
+    img_red.onload = function(){
+        redBit = new createjs.Bitmap(img_red);
+        stage.addChild(redBit);
+        redBit.x = xposRed;
+        redBit.y = yposRed;
+        drawRed();
+        setInterval(drawRed, frameRate);
+    }
+>>>>>>> Stashed changes
   img_ball.onload = function(){
     ballBit = new createjs.Bitmap(img_ball);
     stage.addChild(ballBit);
