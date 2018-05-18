@@ -221,9 +221,9 @@ function main(){
     img_red.src = img_red_source;
     //img_red.crossOrigin = "anonymous"; // Should work fine
 
-  //Bola
-  img_ball.id = "ball";
-  img_ball.src = img_ball_source;
+	  //Bola
+	  img_ball.id = "ball";
+	  img_ball.src = img_ball_source;
 
     container = new createjs.Container();
 
@@ -286,6 +286,8 @@ function main(){
 	//Começa a encher a barra do poder
 	updateProgressBarFillBlue(widthProgressBarBlue);
 	updateProgressBarFillRed(widthProgressBarRed);
+
+	setInterval(checkGoal, frameRate);
 }
 
 function drawBlue(){
