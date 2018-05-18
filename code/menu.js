@@ -21,6 +21,10 @@ function main()
 	var opcoesBtn = document.getElementById("opcoesBtn");
 	var creditosBtn = document.getElementById("creditosBtn");
 
+	if(!queries[0]){
+            queries[0] = 1;
+  }
+
 	simplesBtn.addEventListener("click", function(){
 		document.location.href = "escolha.html" + "?" + queries[0] + "&" + queries[1];
 	});
