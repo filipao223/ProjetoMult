@@ -93,6 +93,9 @@ var progressBarFillRed = -1;
 var widthProgressBarBlue = 0;
 var widthProgressBarRed = 0;
 
+var golosRed;
+var golosBlue;
+
 var queryString;
 var queries;
 
@@ -121,7 +124,10 @@ function main(){
 
 	var destiny = "menu.html" + "?" + queries[0] + "&" + queries[1];
 
-	setTimeout(function(){window.location.href="../html/resultado.html" + "?" + queries[0] + "&" + queries[1]},300000);
+	golosRed = 0;
+	golosBlue = 0;
+
+	setTimeout(function(){window.location.href="../html/resultado.html" + "?" + queries[0] + "&" + queries[1] + "&" + golosRed + "&" + golosBlue},300);
 
 	audio1.volume = 0.3;
 
@@ -129,7 +135,6 @@ function main(){
 		audio1.volume =0;
 	}
 
-<<<<<<< Updated upstream
 	img_blue_source = "../resources/images/blueTeam/char"+queries[3]+"_blue.png";
 	img_red_source = "../resources/images/redTeam/char"+queries[2]+"_red.png";
   img_ball_source = "../resources/images/smallBall.png";
@@ -195,7 +200,7 @@ function main(){
 		drawRed();
 		setInterval(drawRed, frameRate);
 	}
-=======
+
     img_blue_source = "../resources/images/blueTeam/char"+queries[3]+"_blue.png";
     img_red_source = "../resources/images/redTeam/char"+queries[2]+"_red.png";
   	img_ball_source = "../resources/images/smallBall.png";
@@ -261,7 +266,6 @@ function main(){
         drawRed();
         setInterval(drawRed, frameRate);
     }
->>>>>>> Stashed changes
   img_ball.onload = function(){
     ballBit = new createjs.Bitmap(img_ball);
     stage.addChild(ballBit);
