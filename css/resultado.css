@@ -29,6 +29,7 @@ button{
     display: block;
     position: relative;
     transition: 0.5s;
+    top:-1px;
 }
 
 button:after {
@@ -54,7 +55,12 @@ p{
     background-color: #99ae35;
     font-family: monospace;
     font-size: 60px;
-    margin-top: 5%;
+    margin-top: -2%;
     margin-left: 40%;
     margin-right: 40%;
+}
+
+
+img{
+  margin-top: 5%;
 }
