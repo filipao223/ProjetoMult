@@ -265,8 +265,38 @@ function ballMoveUp(){
 	speedBall-=1;
 }
 
+function ballMoveLeft(speedHit){
+	if(checkCollision(redBit, ballBit.x + speedHit, ballBit.y) || checkCollision(blueBit, ballBit.x + speedHit, ballBit.y)){
+		//
+	}
+	else{
+		if(ballBit.x > boundaryLeft){
+			ballBit.x -= speedHit;
+		}
+	}
+
+	speedHit-=1;
+}
+
+function ballMoveRight(speedHit){
+	if(checkCollision(redBit, ballBit.x - speedHit, ballBit.y) || checkCollision(blueBit, ballBit.x - speedHit, ballBit.y)){
+		//
+	}
+	else{
+		if(ballBit.x < boundaryRight){
+			ballBit.x += speedHit;
+		}
+	}
+	speedHit-=1;
+}
+
 function moveLeftBlue(){
 	//console.log("MOVE LEFT BLUE");
+	//Colisao com a bola
+	if(checkCollision(ballBit, blueBit.x-speedBlue, blueBit.y)){
+		ballMoveLeft(speedBlue);
+	}
+
 	//Se não houver colisao
 	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-speedBlue, blueBit.y) == false){
 		//console.log("MOVE LEFT BLUE NO COLL");
