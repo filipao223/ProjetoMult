@@ -52,6 +52,10 @@ var yposRed;
 var xposBall;
 var yposBall;
 
+var speedBall=0;
+var ballGoingUp = -1;
+var ballGoingDown = -1;
+
 var boundaryLeft;
 var boundaryRight;
 
@@ -76,6 +80,7 @@ var jumpSizeRed; //A altura do salto
 var jumpMaxRed = 16;
 
 var yGround;
+var yGroundBall = 620;
 
 var frameRate = 1000/30;
 
@@ -93,7 +98,7 @@ function main(){
 	xposRed = 50;
 	yposRed = 455;
   xposBall = 652;
-  yposBall = 525;
+  yposBall = 300;
 
 	powerRed = 0;
 	powerBlue = 0;
@@ -184,14 +189,14 @@ function main(){
 		drawRed();
 		setInterval(drawRed, frameRate);
 	}
-    img_ball.onload = function(){
-        ballBit = new createjs.Bitmap(img_ball);
-        stage.addChild(ballBit);
-        ballBit.x = xposBall;
-        ballBit.y = yposBall;
-        stage.update();
-        setInterval(stage.update(), frameRate);
-    }
+  img_ball.onload = function(){
+    ballBit = new createjs.Bitmap(img_ball);
+    stage.addChild(ballBit);
+    ballBit.x = xposBall;
+    ballBit.y = yposBall;
+    stage.update();
+    setInterval(drawBall, frameRate);
+  }
 
 	document.addEventListener("keydown", keyDownEvent);
 	document.addEventListener("keyup", keyUpEvent);
@@ -222,6 +227,48 @@ function drawRed(){
 		}
 	}
 	stage.update();
+}
+
+function drawBall(){
+	console.log("drawBall");
+	if(ballGoingDown == -1 && ballBit.y < yGroundBall){
+		console.log("Set ballGoingDown");
+		ballGoingDown = setInterval(ballMoveDown, frameRate);
+	}
+	if(ballGoingUp == -1 && ballBit.y >= yGroundBall){
+		console.log("Set ballGoingUp");
+		ballGoingUp = setInterval(ballMoveUp, frameRate);
+	}
+	stage.update();
+}
+
+function ballMoveDown(){
+	console.log("ballMovingDown");
+	if(ballBit.y < yGroundBall){
+		ballBit.y += speedBall;
+	}
+	else{
+		clearInterval(ballGoingDown);
+		ballGoingDown = -1;
+		speedBall *= 0.7;
+		speedBall = Math.floor(speedBall);
+		console.log(speedBall, "after");
+	}
+	console.log(speedBall);
+	speedBall+=1;
+}
+
+function ballMoveUp(){
+	console.log("ballMovingUp");
+	//Atualiza speedBall
+	if(speedBall > 0){
+		ballBit.y -= speedBall;
+	}
+	else{
+		clearInterval(ballGoingUp);
+		ballGoingUp = -1;
+	}
+	speedBall-=1;
 }
 
 function moveLeftBlue(){
@@ -508,7 +555,7 @@ function updateXY(random){
 			xposRed = 50;
 			yposRed = 455;
 		  xposBall = 652;
-		  yposBall = 525;
+			yGround = yposBlue;
 			drawRed();
 			drawBlue();
 			break;
@@ -518,7 +565,7 @@ function updateXY(random){
 		xposRed = 50;
 		yposRed = 455;
 		xposBall = 652;
-		yposBall = 525;
+		yGround = yposBlue;
 			drawRed();
 			drawBlue();
 			break;
@@ -529,6 +576,7 @@ function updateXY(random){
 		yposRed = 455;
 		xposBall = 652;
 		yposBall = 525;
+		yGround = yposBlue;
 			drawRed();
 			drawBlue();
 			break;
@@ -539,6 +587,7 @@ function updateXY(random){
 		yposRed = 425;
 		xposBall = 652;
 		yposBall = 525;
+		yGround = yposBlue;
 			drawRed();
 			drawBlue();
 			break;
