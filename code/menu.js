@@ -9,7 +9,7 @@
 function main()
 {
 	document.getElementById("sairBtn").onclick = function(){
-  	self.close();
+  	window.close();
     }
 
 		var queryString = decodeURIComponent(window.location.search);

@@ -88,11 +88,11 @@ var widthProgressBarRed = 0;
 
 function main(){
 
-	xposBlue = 850;
-	yposBlue = 360;
+	xposBlue = 1050;
+	yposBlue = 455;
 	xposRed = 50;
-	yposRed = 360;
-  xposBall = 400;
+	yposRed = 455;
+  xposBall = 652;
   yposBall = 525;
 
 	powerRed = 0;
@@ -144,8 +144,8 @@ function main(){
 	stageBack = new createjs.Stage("canvasBack");
 
 	stage = new createjs.Stage("myCanvas");
-	stage.canvas.width = window.innerWidth;
-	stage.canvas.height = window.innerHeight;
+	stage.canvas.width = 1386;
+	stage.canvas.height = 684;
 
 	stageBack.canvas.width = stage.canvas.width;
 	stageBack.canvas.height = stage.canvas.height;
@@ -503,34 +503,42 @@ function updateXY(random){
 	switch(random){
 		case 1:
 		case 5:
-			yposBlue = 360;
-			yposRed = 360;
-			yGround = 360;
-      yposBall = 360;
+			xposBlue = 1050;
+			yposBlue = 455;
+			xposRed = 50;
+			yposRed = 455;
+		  xposBall = 652;
+		  yposBall = 525;
 			drawRed();
 			drawBlue();
 			break;
 		case 2:
-			yposBlue = 358;
-			yposRed = 358;
-			yGround = 358;
-            yposBall = 358;
+		xposBlue = 1050;
+		yposBlue = 455;
+		xposRed = 50;
+		yposRed = 455;
+		xposBall = 652;
+		yposBall = 525;
 			drawRed();
 			drawBlue();
 			break;
 		case 3:
-			yposBlue = 365;
-			yposRed = 365;
-			yGround = 365;
-            yposBall = 365;
+		xposBlue = 1050;
+		yposBlue = 455;
+		xposRed = 50;
+		yposRed = 455;
+		xposBall = 652;
+		yposBall = 525;
 			drawRed();
 			drawBlue();
 			break;
 		case 4:
-			yposBlue = 332;
-			yposRed = 332;
-			yGround = 332;
-            yposBall = 332;
+		xposBlue = 1050;
+		yposBlue = 425;
+		xposRed = 50;
+		yposRed = 425;
+		xposBall = 652;
+		yposBall = 525;
 			drawRed();
 			drawBlue();
 			break;
