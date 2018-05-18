@@ -5,12 +5,12 @@ html
   background-size: cover;
 }
 
-button{
+button
+{
     background-size: auto;
     background-color: transparent;
     border: none;
-    margin-top: 21%;
-  }
+}
 
 button1 {
     border-radius: 2.5%;;
@@ -26,7 +26,7 @@ button1 {
     transition: all 0.5s;
     cursor: pointer;
     align-items: baseline;
-    bottom: -105px;
+    bottom: -100px;
     margin-bottom: 2.5%;
     box-shadow: 0 2.5% 5% -2% rgba(0, 0, 0,.7);
 }

@@ -270,17 +270,15 @@ function ballMoveUp(){
 }
 
 function ballMoveLeft(speedHit){
-	if(checkCollision(redBit, ballBit.x + speedHit, ballBit.y)){
+	if(checkCollision(redBit, ballBit.x + speedHit, ballBit.y) || checkCollision(blueBit, ballBit.x + speedHit, ballBit.y)){
 		//
-	}
-	if(checkCollision(blueBit, ballBit.x + speedHit, ballBit.y) == true){
-		console.log("colisao");
 	}
 	else{
 		if(ballBit.x > boundaryLeft){
 			ballBit.x -= speedHit;
 		}
 	}
+
 	speedHit-=1;
 }
 
@@ -299,7 +297,7 @@ function ballMoveRight(speedHit){
 function moveLeftBlue(){
 	console.log("MOVE LEFT BLUE");
 	//Colisao com a bola
-	if(checkCollision(ballBit, blueBit.x-speedBlue, blueBit.y) == true){
+	if(checkCollision(ballBit, blueBit.x-speedBlue, blueBit.y)){
 		ballMoveLeft(speedBlue);
         console.log("Ball Collision");
 	}
@@ -547,14 +545,8 @@ function keyDownEvent(evt){
 			var queries = queryString.split("&");
 			if(queries[3] == 1){
 				if(powerRed == 0 && progressBarFillRed == -1){
+					powerRed = 1;
 					poderSelect(1, "red", "enable");
-					updateProgressBarEmptyRed(widthProgressBarRed);
-					console.log("Poder ativado");
-				}
-			}
-			if(queries[3] == 2){
-				if(powerRed == 0 && progressBarFillRed == -1){
-					poderSelect(2, "red", "enable");
 					updateProgressBarEmptyRed(widthProgressBarRed);
 					console.log("Poder ativado");
 				}
@@ -742,15 +734,5 @@ function poderSelect(num, jogador, estado){
 				if(estado === "enable") speedRed = 10;
 				else speedRed = 5;
 			}
-		break;
-		case 2:
-		if(jogador === "blue"){
-			if(estado === "enable") speedRed = 2;
-			else speedRed = 2;
-		}
-		else{
-			if(estado === "enable") speedBlue = 2;
-			else speedBlue = 2;
-		}
 	}
 }
