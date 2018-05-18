@@ -257,6 +257,7 @@ function ballMoveDown(){
 	console.log(speedBall);
 	speedBall+=1;
 }
+//Ola
 
 function ballMoveUp(){
 	console.log("ballMovingUp");
