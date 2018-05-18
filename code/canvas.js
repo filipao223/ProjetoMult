@@ -144,8 +144,8 @@ function main(){
 	stageBack = new createjs.Stage("canvasBack");
 
 	stage = new createjs.Stage("myCanvas");
-	stage.canvas.width = 1200;
-	stage.canvas.height = 600;
+	stage.canvas.width = window.innerWidth;
+	stage.canvas.height = window.innerHeight;
 
 	stageBack.canvas.width = stage.canvas.width;
 	stageBack.canvas.height = stage.canvas.height;
@@ -227,13 +227,13 @@ function drawRed(){
 function moveLeftBlue(){
 	//console.log("MOVE LEFT BLUE");
 	//Se não houver colisao
-	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x- (powerBlue==1?speedBlue/2:speedBlue), blueBit.y) == false){
+	if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-speedBlue, blueBit.y) == false){
 		//console.log("MOVE LEFT BLUE NO COLL");
 		blueBit.x -= speedBlue;
 	}
 
 	//Se houver colisao
-	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-(powerBlue==1?speedBlue/2:speedBlue), blueBit.y) == true){
+	else if(blueBit.x > boundaryLeft && checkCollision(redBit, blueBit.x-speedBlue, blueBit.y) == true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(blueBit.y < yGround - 20){
 			blueBit.x -= speedBlue;
@@ -322,11 +322,11 @@ function moveRightRed(){
 
 function moveRightBlue(){
 	//console.log("MOVE RIGHT BLUE");
-	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x+(powerBlue==1&&currentPower==1?speedBlue/2:speedBlue), blueBit.y)==false){
+	if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x+speedBlue, blueBit.y)==false){
 		//console.log("MOVE RIGHT BLUE NO COL");
 		blueBit.x += speedBlue;
 	}
-	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x+(powerBlue==1&&currentPower==1?speedBlue/2:speedBlue), blueBit.y)==true){
+	else if(blueBit.x < boundaryRight && checkCollision(redBit, blueBit.x+speedBlue, blueBit.y)==true){
 		//Se estiver a um certo y do chao, passa por cima
 		if(blueBit.y < yGround - 20){
 			blueBit.x += speedBlue;

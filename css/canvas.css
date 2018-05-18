@@ -1,13 +1,13 @@
 myCanvas{
     padding: 0;
     margin: auto;
-    display: inline;
+    display: block;
 }
 
 canvasBack{
   padding: 0;
   margin: auto;
-  display: inline;
+  display: block;
 }
 
 html{
@@ -18,15 +18,13 @@ html{
 
 #fundoBarra{
     position: relative;
-    top: 620px;
-    width: 100%;
+    width: 20%;
     background-color: grey;
 }
 #progressoBarraAzul {
     width: 0%;
     height: 30px;
     text-align: center;
-    line-height: 30px;
     background-color: blue;
 }
 
@@ -34,6 +32,5 @@ html{
   width: 0%;
   height: 30px;
   text-align: center;
-  line-height: 30px;
   background-color: red;
 }
