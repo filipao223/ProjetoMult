@@ -17,6 +17,13 @@ function main()
 			audio1.volume =0;
 		}
 
+		if(queries[2] && queries[3] != "undefined"){
+    	texto.textContent=(queries[2] + "-" + queries[3]);
+		}
+		else{
+			texto.textContent=(0 + "-" + 0);
+		}
+
 		var menuBtn = document.getElementById("menuBtn");
 
 
