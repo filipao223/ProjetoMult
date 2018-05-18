@@ -127,7 +127,7 @@ function main(){
 	golosRed = 0;
 	golosBlue = 0;
 
-	setTimeout(function(){window.location.href="../html/resultado.html" + "?" + queries[0] + "&" + queries[1] + "&" + golosRed + "&" + golosBlue},300);
+	setTimeout(function(){window.location.href="../html/resultado.html" + "?" + queries[0] + "&" + queries[1] + "&" + golosRed + "&" + golosBlue},300000);
 
 	audio1.volume = 0.3;
 
